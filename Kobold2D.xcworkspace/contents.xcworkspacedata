@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:DoodleDrop/DoodleDrop.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Hello World/Hello World.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:__Kobold2D__/Kobold2D-Libraries.xcodeproj">
+   </FileRef>
+</Workspace>
