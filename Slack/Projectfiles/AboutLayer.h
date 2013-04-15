@@ -1,5 +1,5 @@
 //
-//  GameLayer.h
+//  AboutLayer.h
 //  Slack
 //
 //  Created by Jacob Preston on 4/14/13.
@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface GameLayer : CCLayer {
+@interface AboutLayer : CCLayer {
     
 }
-
 
 + (id) scene;
 

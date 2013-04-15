@@ -1,4 +1,3 @@
-
 /*
  * Kobold2D™ --- http://www.kobold2d.org
  *
