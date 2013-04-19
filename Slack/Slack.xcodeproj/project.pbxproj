@@ -35,6 +35,16 @@
 		43767ABE171DEF4900D298D0 /* SlacklineMenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABB171DEF4900D298D0 /* SlacklineMenu2.png */; };
 		43767ABF171DEF4900D298D0 /* SlacklineMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABC171DEF4900D298D0 /* SlacklineMenu.png */; };
 		43767AC0171DEF4900D298D0 /* SlacklineMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABC171DEF4900D298D0 /* SlacklineMenu.png */; };
+		43D87E5A1721CF9C005C9840 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E591721CF9C005C9840 /* MainMenuLayer.m */; };
+		43D87E5B1721CF9C005C9840 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E591721CF9C005C9840 /* MainMenuLayer.m */; };
+		43D87E5E1721D048005C9840 /* AchievementModeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E5D1721D048005C9840 /* AchievementModeLayer.m */; };
+		43D87E5F1721D048005C9840 /* AchievementModeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E5D1721D048005C9840 /* AchievementModeLayer.m */; };
+		43D87E621721D069005C9840 /* HowToLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E611721D069005C9840 /* HowToLayer.m */; };
+		43D87E631721D069005C9840 /* HowToLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E611721D069005C9840 /* HowToLayer.m */; };
+		43D87E661721D077005C9840 /* HighScoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E651721D077005C9840 /* HighScoreLayer.m */; };
+		43D87E671721D077005C9840 /* HighScoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E651721D077005C9840 /* HighScoreLayer.m */; };
+		43D87E6A1721D088005C9840 /* GetInvolvedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E691721D088005C9840 /* GetInvolvedLayer.m */; };
+		43D87E6B1721D088005C9840 /* GetInvolvedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E691721D088005C9840 /* GetInvolvedLayer.m */; };
 		DC21B88B1511078F00FD4891 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DC21B8881511078F00FD4891 /* fps_images-hd.png */; };
 		DC21B88C1511078F00FD4891 /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DC21B8891511078F00FD4891 /* fps_images-ipadhd.png */; };
 		DC21B88D1511078F00FD4891 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DC21B88A1511078F00FD4891 /* fps_images.png */; };
@@ -96,6 +106,16 @@
 		43767AB2171DEA5B00D298D0 /* slack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slack.png; sourceTree = "<group>"; };
 		43767ABB171DEF4900D298D0 /* SlacklineMenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SlacklineMenu2.png; sourceTree = "<group>"; };
 		43767ABC171DEF4900D298D0 /* SlacklineMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SlacklineMenu.png; sourceTree = "<group>"; };
+		43D87E581721CF9C005C9840 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
+		43D87E591721CF9C005C9840 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
+		43D87E5C1721D048005C9840 /* AchievementModeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementModeLayer.h; sourceTree = "<group>"; };
+		43D87E5D1721D048005C9840 /* AchievementModeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementModeLayer.m; sourceTree = "<group>"; };
+		43D87E601721D069005C9840 /* HowToLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToLayer.h; sourceTree = "<group>"; };
+		43D87E611721D069005C9840 /* HowToLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToLayer.m; sourceTree = "<group>"; };
+		43D87E641721D077005C9840 /* HighScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreLayer.h; sourceTree = "<group>"; };
+		43D87E651721D077005C9840 /* HighScoreLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreLayer.m; sourceTree = "<group>"; };
+		43D87E681721D088005C9840 /* GetInvolvedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetInvolvedLayer.h; sourceTree = "<group>"; };
+		43D87E691721D088005C9840 /* GetInvolvedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetInvolvedLayer.m; sourceTree = "<group>"; };
 		DC21B8881511078F00FD4891 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-hd.png"; sourceTree = "<group>"; };
 		DC21B8891511078F00FD4891 /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-ipadhd.png"; sourceTree = "<group>"; };
 		DC21B88A1511078F00FD4891 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
@@ -272,6 +292,16 @@
 				435D5090171B48DC00CD21A6 /* GameLayer.h */,
 				435D5091171B48DC00CD21A6 /* GameLayer.m */,
 				43661290171B8B65002D9F70 /* HelpLayer.h */,
+				43D87E581721CF9C005C9840 /* MainMenuLayer.h */,
+				43D87E591721CF9C005C9840 /* MainMenuLayer.m */,
+				43D87E5C1721D048005C9840 /* AchievementModeLayer.h */,
+				43D87E5D1721D048005C9840 /* AchievementModeLayer.m */,
+				43D87E601721D069005C9840 /* HowToLayer.h */,
+				43D87E611721D069005C9840 /* HowToLayer.m */,
+				43D87E681721D088005C9840 /* GetInvolvedLayer.h */,
+				43D87E691721D088005C9840 /* GetInvolvedLayer.m */,
+				43D87E641721D077005C9840 /* HighScoreLayer.h */,
+				43D87E651721D077005C9840 /* HighScoreLayer.m */,
 				43661291171B8B65002D9F70 /* HelpLayer.m */,
 				43661294171B8B86002D9F70 /* PlayLayer.h */,
 				43661295171B8B86002D9F70 /* PlayLayer.m */,
@@ -456,6 +486,11 @@
 				43661292171B8B65002D9F70 /* HelpLayer.m in Sources */,
 				43661296171B8B86002D9F70 /* PlayLayer.m in Sources */,
 				4366129A171B8B97002D9F70 /* SlackLayer.m in Sources */,
+				43D87E5A1721CF9C005C9840 /* MainMenuLayer.m in Sources */,
+				43D87E5E1721D048005C9840 /* AchievementModeLayer.m in Sources */,
+				43D87E621721D069005C9840 /* HowToLayer.m in Sources */,
+				43D87E661721D077005C9840 /* HighScoreLayer.m in Sources */,
+				43D87E6A1721D088005C9840 /* GetInvolvedLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +505,11 @@
 				43661293171B8B65002D9F70 /* HelpLayer.m in Sources */,
 				43661297171B8B86002D9F70 /* PlayLayer.m in Sources */,
 				4366129B171B8B97002D9F70 /* SlackLayer.m in Sources */,
+				43D87E5B1721CF9C005C9840 /* MainMenuLayer.m in Sources */,
+				43D87E5F1721D048005C9840 /* AchievementModeLayer.m in Sources */,
+				43D87E631721D069005C9840 /* HowToLayer.m in Sources */,
+				43D87E671721D077005C9840 /* HighScoreLayer.m in Sources */,
+				43D87E6B1721D088005C9840 /* GetInvolvedLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

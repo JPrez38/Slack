@@ -1,24 +1,22 @@
 //
-//  PlayLayer.m
+//  HighScoreLayer.m
 //  Slack
 //
-//  Created by Jacob Preston on 4/14/13.
+//  Created by Jacob Preston on 4/19/13.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import "PlayLayer.h"
-#import "GameLayer.h"
-#import "SlackLayer.h"
+#import "HighScoreLayer.h"
 #import "MainMenuLayer.h"
 
 
-@implementation PlayLayer
+@implementation HighScoreLayer
 
 - (id) init {
     
     if ((self = [super init]))
     {
-        NSLog(@"PlayLayer Screen Called");
+        NSLog(@"About Screen Called");
         [self setUpMenus];
     }
     return self;
@@ -26,7 +24,7 @@
 
 + (id) scene {
     CCScene *scene = [CCScene node];
-    CCLayer* layer = [PlayLayer node];
+    CCLayer* layer = [HighScoreLayer node];
     [scene addChild:layer];
     return scene;
 }
