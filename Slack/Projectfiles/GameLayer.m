@@ -34,19 +34,19 @@
 {
     
 	// Create some menu items
-	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"button1.png"
-                                                         selectedImage: @"button1.png"
+	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
+                                                         selectedImage: @"SlacklineMenu2.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
     
-	CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"button2.png"
-                                                         selectedImage: @"button2.png"
+	CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
+                                                         selectedImage: @"SlacklineMenu2.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
     
     
-	CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"button3.png"
-                                                         selectedImage: @"button3.png"
+	CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
+                                                         selectedImage: @"SlacklineMenu2.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
     menuItem1.tag=1;
