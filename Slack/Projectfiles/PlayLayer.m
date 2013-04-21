@@ -29,6 +29,7 @@
 		
 		CCSprite* background = [CCSprite spriteWithFile:@"BG1.png"];
 		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+        background.opacity=156;
 		[self addChild:background];
          
         
