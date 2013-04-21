@@ -11,7 +11,14 @@
 
 @interface PlayLayer : CCLayer {
     CCSprite* player;
+    CCSprite* leftStoppedBar;
+    CCSprite* rightStoppedBar;
+    CCSprite* leftMovingBar;
+    CCSprite* rightMovingBar;
+    CCSprite* slackline;
     CGPoint playerVelocity;
+    int score;
+	CCNode<CCLabelProtocol>* scoreLabel;
 }
 
 + (id) scene;

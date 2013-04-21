@@ -37,6 +37,18 @@
 		439F281717245FD20036C454 /* LoadingScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 439F281517245FD20036C454 /* LoadingScreen.m */; };
 		439F2819172477DD0036C454 /* slackicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2818172477DD0036C454 /* slackicon.png */; };
 		439F281A172477DD0036C454 /* slackicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2818172477DD0036C454 /* slackicon.png */; };
+		439F281C1724804D0036C454 /* redslackline.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F281B1724804D0036C454 /* redslackline.png */; };
+		439F281D1724804D0036C454 /* redslackline.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F281B1724804D0036C454 /* redslackline.png */; };
+		439F281F1724A93E0036C454 /* BG1.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F281E1724A93E0036C454 /* BG1.png */; };
+		439F28201724A93E0036C454 /* BG1.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F281E1724A93E0036C454 /* BG1.png */; };
+		439F28251724ABF20036C454 /* bitmapfont-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 439F28211724ABF00036C454 /* bitmapfont-hd.fnt */; };
+		439F28261724ABF20036C454 /* bitmapfont-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 439F28211724ABF00036C454 /* bitmapfont-hd.fnt */; };
+		439F28271724ABF20036C454 /* bitmapfont-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F28221724ABF00036C454 /* bitmapfont-hd.png */; };
+		439F28281724ABF20036C454 /* bitmapfont-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F28221724ABF00036C454 /* bitmapfont-hd.png */; };
+		439F28291724ABF20036C454 /* bitmapfont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 439F28231724ABF10036C454 /* bitmapfont.fnt */; };
+		439F282A1724ABF20036C454 /* bitmapfont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 439F28231724ABF10036C454 /* bitmapfont.fnt */; };
+		439F282B1724ABF20036C454 /* bitmapfont.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F28241724ABF10036C454 /* bitmapfont.png */; };
+		439F282C1724ABF20036C454 /* bitmapfont.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F28241724ABF10036C454 /* bitmapfont.png */; };
 		43D87E5A1721CF9C005C9840 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E591721CF9C005C9840 /* MainMenuLayer.m */; };
 		43D87E5B1721CF9C005C9840 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E591721CF9C005C9840 /* MainMenuLayer.m */; };
 		43D87E5E1721D048005C9840 /* AchievementModeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E5D1721D048005C9840 /* AchievementModeLayer.m */; };
@@ -106,6 +118,12 @@
 		439F281417245FD20036C454 /* LoadingScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScreen.h; sourceTree = "<group>"; };
 		439F281517245FD20036C454 /* LoadingScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingScreen.m; sourceTree = "<group>"; };
 		439F2818172477DD0036C454 /* slackicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slackicon.png; sourceTree = "<group>"; };
+		439F281B1724804D0036C454 /* redslackline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redslackline.png; sourceTree = "<group>"; };
+		439F281E1724A93E0036C454 /* BG1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1.png; path = Projectfiles/Resources/BG1.png; sourceTree = SOURCE_ROOT; };
+		439F28211724ABF00036C454 /* bitmapfont-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bitmapfont-hd.fnt"; sourceTree = "<group>"; };
+		439F28221724ABF00036C454 /* bitmapfont-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bitmapfont-hd.png"; sourceTree = "<group>"; };
+		439F28231724ABF10036C454 /* bitmapfont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bitmapfont.fnt; sourceTree = "<group>"; };
+		439F28241724ABF10036C454 /* bitmapfont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmapfont.png; sourceTree = "<group>"; };
 		43D87E581721CF9C005C9840 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		43D87E591721CF9C005C9840 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		43D87E5C1721D048005C9840 /* AchievementModeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementModeLayer.h; sourceTree = "<group>"; };
@@ -314,10 +332,16 @@
 		DCC1A39413A94F1A005BD75D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				439F28211724ABF00036C454 /* bitmapfont-hd.fnt */,
+				439F28221724ABF00036C454 /* bitmapfont-hd.png */,
+				439F28231724ABF10036C454 /* bitmapfont.fnt */,
+				439F28241724ABF10036C454 /* bitmapfont.png */,
 				43767ABB171DEF4900D298D0 /* SlacklineMenu2.png */,
+				439F281E1724A93E0036C454 /* BG1.png */,
 				43767ABC171DEF4900D298D0 /* SlacklineMenu.png */,
 				439F2818172477DD0036C454 /* slackicon.png */,
 				43767AAF171DEA5B00D298D0 /* Slackline.jpg */,
+				439F281B1724804D0036C454 /* redslackline.png */,
 				43767AB0171DEA5B00D298D0 /* BG.png */,
 				43767AB1171DEA5B00D298D0 /* BG.ai */,
 				43767AB2171DEA5B00D298D0 /* slack.png */,
@@ -450,6 +474,12 @@
 				439F280C172457800036C454 /* line.png in Resources */,
 				439F280E172457800036C454 /* ball.png in Resources */,
 				439F2819172477DD0036C454 /* slackicon.png in Resources */,
+				439F281C1724804D0036C454 /* redslackline.png in Resources */,
+				439F281F1724A93E0036C454 /* BG1.png in Resources */,
+				439F28251724ABF20036C454 /* bitmapfont-hd.fnt in Resources */,
+				439F28271724ABF20036C454 /* bitmapfont-hd.png in Resources */,
+				439F28291724ABF20036C454 /* bitmapfont.fnt in Resources */,
+				439F282B1724ABF20036C454 /* bitmapfont.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +505,12 @@
 				439F280D172457800036C454 /* line.png in Resources */,
 				439F280F172457800036C454 /* ball.png in Resources */,
 				439F281A172477DD0036C454 /* slackicon.png in Resources */,
+				439F281D1724804D0036C454 /* redslackline.png in Resources */,
+				439F28201724A93E0036C454 /* BG1.png in Resources */,
+				439F28261724ABF20036C454 /* bitmapfont-hd.fnt in Resources */,
+				439F28281724ABF20036C454 /* bitmapfont-hd.png in Resources */,
+				439F282A1724ABF20036C454 /* bitmapfont.fnt in Resources */,
+				439F282C1724ABF20036C454 /* bitmapfont.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
