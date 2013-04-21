@@ -10,7 +10,8 @@
 #import "cocos2d.h"
 
 @interface PlayLayer : CCLayer {
-    
+    CCSprite* player;
+    CGPoint playerVelocity;
 }
 
 + (id) scene;

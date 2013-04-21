@@ -7,8 +7,6 @@
 //
 
 #import "PlayLayer.h"
-#import "GameLayer.h"
-#import "SlackLayer.h"
 #import "MainMenuLayer.h"
 
 
@@ -19,7 +17,17 @@
     if ((self = [super init]))
     {
         NSLog(@"PlayLayer Screen Called");
-        [self setUpMenus];
+        #if KK_PLATFORM_IOS
+            self.isAccelerometerEnabled = YES;
+        #endif
+		player = [CCSprite spriteWithFile:@"ball.png"];
+        [self addChild:player z:0 tag:1];
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        float imageHeight = player.texture.contentSize.height;
+        player.position = CGPointMake(screenSize.width / 2, imageHeight / 2);
+		
+		// schedules the –(void) update:(ccTime)delta method to be called every frame
+		[self scheduleUpdate];
     }
     return self;
 }
@@ -31,36 +39,59 @@
     return scene;
 }
 
--(void) setUpMenus
+-(void) update:(ccTime)delta
 {
-    
-	// Create some menu items
-	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-                                                         selectedImage: @"SlacklineMenu2.png"
-                                                                target:self
-                                                              selector:@selector(doSomething:)];
-    menuItem1.tag=1;
-    
-    
-	// Create a menu and add your menu items to it
-	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
-    
-	// Arrange the menu items vertically
-	[myMenu alignItemsVertically];
-    
-	// add the menu to your scene
-	[self addChild:myMenu];
+	// Keep adding up the playerVelocity to the player's position
+	CGPoint pos = player.position;
+	pos.x += playerVelocity.x;
+	
+	// The Player should also be stopped from going outside the screen
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	float imageWidthHalved = player.texture.contentSize.width * 0.5f;
+	float leftBorderLimit = imageWidthHalved;
+	float rightBorderLimit = screenSize.width - imageWidthHalved;
+	
+	// preventing the player sprite from moving outside the screen
+	if (pos.x < leftBorderLimit)
+	{
+		pos.x = leftBorderLimit;
+		playerVelocity = CGPointZero;
+	}
+	else if (pos.x > rightBorderLimit)
+	{
+		pos.x = rightBorderLimit;
+		playerVelocity = CGPointZero;
+	}
+	
+	// assigning the modified position back
+	player.position = pos;
 }
 
-- (void) doSomething: (CCMenuItem  *) menuItem
+#if KK_PLATFORM_IOS
+-(void) accelerometer:(UIAccelerometer *)accelerometer
+        didAccelerate:(UIAcceleration *)acceleration
 {
-	int parameter = menuItem.tag;
-    //psst! you can create a wrapper around your init method to pass in parameters
-    if (parameter==1) {
-        [[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
-        
-    }
+	// controls how quickly velocity decelerates (lower = quicker to change direction)
+	float deceleration = 0.4f;
+	// determines how sensitive the accelerometer reacts (higher = more sensitive)
+	float sensitivity = 6.0f;
+	// how fast the velocity can be at most
+	float maxVelocity = 100;
+	
+	// adjust velocity based on current accelerometer acceleration
+	playerVelocity.x = playerVelocity.x * deceleration + acceleration.x * sensitivity;
+	
+	// we must limit the maximum velocity of the player sprite, in both directions
+	if (playerVelocity.x > maxVelocity)
+	{
+		playerVelocity.x = maxVelocity;
+	}
+	else if (playerVelocity.x < - maxVelocity)
+	{
+		playerVelocity.x = - maxVelocity;
+	}
 }
+#endif
 
 -(void) dealloc
 {

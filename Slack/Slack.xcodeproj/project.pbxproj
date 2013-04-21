@@ -7,22 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		435D5092171B48DC00CD21A6 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 435D5091171B48DC00CD21A6 /* GameLayer.m */; };
-		435D5093171B48DC00CD21A6 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 435D5091171B48DC00CD21A6 /* GameLayer.m */; };
 		43661286171B8267002D9F70 /* button3.png in Resources */ = {isa = PBXBuildFile; fileRef = 43661283171B8267002D9F70 /* button3.png */; };
 		43661287171B8267002D9F70 /* button3.png in Resources */ = {isa = PBXBuildFile; fileRef = 43661283171B8267002D9F70 /* button3.png */; };
 		43661288171B8267002D9F70 /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43661284171B8267002D9F70 /* button2.png */; };
 		43661289171B8267002D9F70 /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43661284171B8267002D9F70 /* button2.png */; };
 		4366128A171B8267002D9F70 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43661285171B8267002D9F70 /* button1.png */; };
 		4366128B171B8267002D9F70 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43661285171B8267002D9F70 /* button1.png */; };
-		4366128E171B862C002D9F70 /* AboutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366128D171B862C002D9F70 /* AboutLayer.m */; };
-		4366128F171B862C002D9F70 /* AboutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366128D171B862C002D9F70 /* AboutLayer.m */; };
-		43661292171B8B65002D9F70 /* HelpLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43661291171B8B65002D9F70 /* HelpLayer.m */; };
-		43661293171B8B65002D9F70 /* HelpLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43661291171B8B65002D9F70 /* HelpLayer.m */; };
 		43661296171B8B86002D9F70 /* PlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43661295171B8B86002D9F70 /* PlayLayer.m */; };
 		43661297171B8B86002D9F70 /* PlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43661295171B8B86002D9F70 /* PlayLayer.m */; };
-		4366129A171B8B97002D9F70 /* SlackLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43661299171B8B97002D9F70 /* SlackLayer.m */; };
-		4366129B171B8B97002D9F70 /* SlackLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43661299171B8B97002D9F70 /* SlackLayer.m */; };
 		43767AB3171DEA5B00D298D0 /* Slackline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43767AAF171DEA5B00D298D0 /* Slackline.jpg */; };
 		43767AB4171DEA5B00D298D0 /* Slackline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43767AAF171DEA5B00D298D0 /* Slackline.jpg */; };
 		43767AB5171DEA5B00D298D0 /* BG.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767AB0171DEA5B00D298D0 /* BG.png */; };
@@ -35,6 +27,16 @@
 		43767ABE171DEF4900D298D0 /* SlacklineMenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABB171DEF4900D298D0 /* SlacklineMenu2.png */; };
 		43767ABF171DEF4900D298D0 /* SlacklineMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABC171DEF4900D298D0 /* SlacklineMenu.png */; };
 		43767AC0171DEF4900D298D0 /* SlacklineMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABC171DEF4900D298D0 /* SlacklineMenu.png */; };
+		439F280A172457800036C454 /* line2.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2807172457800036C454 /* line2.png */; };
+		439F280B172457800036C454 /* line2.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2807172457800036C454 /* line2.png */; };
+		439F280C172457800036C454 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2808172457800036C454 /* line.png */; };
+		439F280D172457800036C454 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2808172457800036C454 /* line.png */; };
+		439F280E172457800036C454 /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2809172457800036C454 /* ball.png */; };
+		439F280F172457800036C454 /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2809172457800036C454 /* ball.png */; };
+		439F281617245FD20036C454 /* LoadingScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 439F281517245FD20036C454 /* LoadingScreen.m */; };
+		439F281717245FD20036C454 /* LoadingScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 439F281517245FD20036C454 /* LoadingScreen.m */; };
+		439F2819172477DD0036C454 /* slackicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2818172477DD0036C454 /* slackicon.png */; };
+		439F281A172477DD0036C454 /* slackicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2818172477DD0036C454 /* slackicon.png */; };
 		43D87E5A1721CF9C005C9840 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E591721CF9C005C9840 /* MainMenuLayer.m */; };
 		43D87E5B1721CF9C005C9840 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E591721CF9C005C9840 /* MainMenuLayer.m */; };
 		43D87E5E1721D048005C9840 /* AchievementModeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E5D1721D048005C9840 /* AchievementModeLayer.m */; };
@@ -87,25 +89,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		435D5090171B48DC00CD21A6 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
-		435D5091171B48DC00CD21A6 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		43661283171B8267002D9F70 /* button3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button3.png; path = ../button3.png; sourceTree = "<group>"; };
 		43661284171B8267002D9F70 /* button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button2.png; path = ../button2.png; sourceTree = "<group>"; };
 		43661285171B8267002D9F70 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button1.png; path = ../button1.png; sourceTree = "<group>"; };
-		4366128C171B862C002D9F70 /* AboutLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutLayer.h; sourceTree = "<group>"; };
-		4366128D171B862C002D9F70 /* AboutLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutLayer.m; sourceTree = "<group>"; };
-		43661290171B8B65002D9F70 /* HelpLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpLayer.h; sourceTree = "<group>"; };
-		43661291171B8B65002D9F70 /* HelpLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpLayer.m; sourceTree = "<group>"; };
 		43661294171B8B86002D9F70 /* PlayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayLayer.h; sourceTree = "<group>"; };
 		43661295171B8B86002D9F70 /* PlayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayLayer.m; sourceTree = "<group>"; };
-		43661298171B8B97002D9F70 /* SlackLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlackLayer.h; sourceTree = "<group>"; };
-		43661299171B8B97002D9F70 /* SlackLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlackLayer.m; sourceTree = "<group>"; };
 		43767AAF171DEA5B00D298D0 /* Slackline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Slackline.jpg; sourceTree = "<group>"; };
 		43767AB0171DEA5B00D298D0 /* BG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG.png; sourceTree = "<group>"; };
 		43767AB1171DEA5B00D298D0 /* BG.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BG.ai; sourceTree = "<group>"; };
 		43767AB2171DEA5B00D298D0 /* slack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slack.png; sourceTree = "<group>"; };
 		43767ABB171DEF4900D298D0 /* SlacklineMenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SlacklineMenu2.png; sourceTree = "<group>"; };
 		43767ABC171DEF4900D298D0 /* SlacklineMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SlacklineMenu.png; sourceTree = "<group>"; };
+		439F2807172457800036C454 /* line2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line2.png; sourceTree = "<group>"; };
+		439F2808172457800036C454 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		439F2809172457800036C454 /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
+		439F281417245FD20036C454 /* LoadingScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScreen.h; sourceTree = "<group>"; };
+		439F281517245FD20036C454 /* LoadingScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingScreen.m; sourceTree = "<group>"; };
+		439F2818172477DD0036C454 /* slackicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slackicon.png; sourceTree = "<group>"; };
 		43D87E581721CF9C005C9840 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		43D87E591721CF9C005C9840 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		43D87E5C1721D048005C9840 /* AchievementModeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementModeLayer.h; sourceTree = "<group>"; };
@@ -289,9 +289,8 @@
 		DCC1A38C13A94F1A005BD75D /* Projectfiles */ = {
 			isa = PBXGroup;
 			children = (
-				435D5090171B48DC00CD21A6 /* GameLayer.h */,
-				435D5091171B48DC00CD21A6 /* GameLayer.m */,
-				43661290171B8B65002D9F70 /* HelpLayer.h */,
+				439F281417245FD20036C454 /* LoadingScreen.h */,
+				439F281517245FD20036C454 /* LoadingScreen.m */,
 				43D87E581721CF9C005C9840 /* MainMenuLayer.h */,
 				43D87E591721CF9C005C9840 /* MainMenuLayer.m */,
 				43D87E5C1721D048005C9840 /* AchievementModeLayer.h */,
@@ -302,13 +301,8 @@
 				43D87E691721D088005C9840 /* GetInvolvedLayer.m */,
 				43D87E641721D077005C9840 /* HighScoreLayer.h */,
 				43D87E651721D077005C9840 /* HighScoreLayer.m */,
-				43661291171B8B65002D9F70 /* HelpLayer.m */,
 				43661294171B8B86002D9F70 /* PlayLayer.h */,
 				43661295171B8B86002D9F70 /* PlayLayer.m */,
-				43661298171B8B97002D9F70 /* SlackLayer.h */,
-				43661299171B8B97002D9F70 /* SlackLayer.m */,
-				4366128C171B862C002D9F70 /* AboutLayer.h */,
-				4366128D171B862C002D9F70 /* AboutLayer.m */,
 				DCC1A38D13A94F1A005BD75D /* AppDelegate.h */,
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
 				DCC1A39413A94F1A005BD75D /* Resources */,
@@ -322,11 +316,15 @@
 			children = (
 				43767ABB171DEF4900D298D0 /* SlacklineMenu2.png */,
 				43767ABC171DEF4900D298D0 /* SlacklineMenu.png */,
+				439F2818172477DD0036C454 /* slackicon.png */,
 				43767AAF171DEA5B00D298D0 /* Slackline.jpg */,
 				43767AB0171DEA5B00D298D0 /* BG.png */,
 				43767AB1171DEA5B00D298D0 /* BG.ai */,
 				43767AB2171DEA5B00D298D0 /* slack.png */,
 				43661283171B8267002D9F70 /* button3.png */,
+				439F2807172457800036C454 /* line2.png */,
+				439F2808172457800036C454 /* line.png */,
+				439F2809172457800036C454 /* ball.png */,
 				43661284171B8267002D9F70 /* button2.png */,
 				43661285171B8267002D9F70 /* button1.png */,
 				DCC1A39513A94F1A005BD75D /* config.lua */,
@@ -448,6 +446,10 @@
 				43767AB9171DEA5B00D298D0 /* slack.png in Resources */,
 				43767ABD171DEF4900D298D0 /* SlacklineMenu2.png in Resources */,
 				43767ABF171DEF4900D298D0 /* SlacklineMenu.png in Resources */,
+				439F280A172457800036C454 /* line2.png in Resources */,
+				439F280C172457800036C454 /* line.png in Resources */,
+				439F280E172457800036C454 /* ball.png in Resources */,
+				439F2819172477DD0036C454 /* slackicon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +471,10 @@
 				43767ABA171DEA5B00D298D0 /* slack.png in Resources */,
 				43767ABE171DEF4900D298D0 /* SlacklineMenu2.png in Resources */,
 				43767AC0171DEF4900D298D0 /* SlacklineMenu.png in Resources */,
+				439F280B172457800036C454 /* line2.png in Resources */,
+				439F280D172457800036C454 /* line.png in Resources */,
+				439F280F172457800036C454 /* ball.png in Resources */,
+				439F281A172477DD0036C454 /* slackicon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,16 +487,13 @@
 			files = (
 				DCC1A3A913A94F1A005BD75D /* AppDelegate.m in Sources */,
 				DCC1A3AD13A94F1A005BD75D /* main.m in Sources */,
-				435D5092171B48DC00CD21A6 /* GameLayer.m in Sources */,
-				4366128E171B862C002D9F70 /* AboutLayer.m in Sources */,
-				43661292171B8B65002D9F70 /* HelpLayer.m in Sources */,
 				43661296171B8B86002D9F70 /* PlayLayer.m in Sources */,
-				4366129A171B8B97002D9F70 /* SlackLayer.m in Sources */,
 				43D87E5A1721CF9C005C9840 /* MainMenuLayer.m in Sources */,
 				43D87E5E1721D048005C9840 /* AchievementModeLayer.m in Sources */,
 				43D87E621721D069005C9840 /* HowToLayer.m in Sources */,
 				43D87E661721D077005C9840 /* HighScoreLayer.m in Sources */,
 				43D87E6A1721D088005C9840 /* GetInvolvedLayer.m in Sources */,
+				439F281617245FD20036C454 /* LoadingScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,16 +503,13 @@
 			files = (
 				DCC1A3AA13A94F1A005BD75D /* AppDelegate.m in Sources */,
 				DCC1A3AE13A94F1A005BD75D /* main.m in Sources */,
-				435D5093171B48DC00CD21A6 /* GameLayer.m in Sources */,
-				4366128F171B862C002D9F70 /* AboutLayer.m in Sources */,
-				43661293171B8B65002D9F70 /* HelpLayer.m in Sources */,
 				43661297171B8B86002D9F70 /* PlayLayer.m in Sources */,
-				4366129B171B8B97002D9F70 /* SlackLayer.m in Sources */,
 				43D87E5B1721CF9C005C9840 /* MainMenuLayer.m in Sources */,
 				43D87E5F1721D048005C9840 /* AchievementModeLayer.m in Sources */,
 				43D87E631721D069005C9840 /* HowToLayer.m in Sources */,
 				43D87E671721D077005C9840 /* HighScoreLayer.m in Sources */,
 				43D87E6B1721D088005C9840 /* GetInvolvedLayer.m in Sources */,
+				439F281717245FD20036C454 /* LoadingScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

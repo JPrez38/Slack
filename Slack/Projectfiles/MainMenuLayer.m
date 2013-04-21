@@ -12,6 +12,7 @@
 #import "HowToLayer.h"
 #import "HighScoreLayer.h"
 #import "GetInvolvedLayer.h"
+#import "LoadingScreen.h"
 
 @implementation MainMenuLayer
 
@@ -80,29 +81,65 @@
 	int parameter = menuItem.tag;
     //psst! you can create a wrapper around your init method to pass in parameters
     if (parameter==1) {
-        [[CCDirector sharedDirector] replaceScene: [PlayLayer scene]];
-        
+        [self changeScene:[PlayLayer scene]];
     }
-    
     if (parameter==2) {
-        [[CCDirector sharedDirector] replaceScene: [AchievementModeLayer scene]];
-        
+        [self changeScene:[AchievementModeLayer scene]];
     }
-    
     if (parameter==3) {
-        [[CCDirector sharedDirector] replaceScene: [HowToLayer scene]];
-        
+        [self changeScene:[HowToLayer scene]];
     }
-    
     if (parameter==4) {
-        [[CCDirector sharedDirector] replaceScene: [HighScoreLayer scene]];
-        
+        [self changeScene:[HighScoreLayer scene]];
     }
-    
     if (parameter==5) {
-        [[CCDirector sharedDirector] replaceScene: [GetInvolvedLayer scene]];
-        
+        [self changeScene:[GetInvolvedLayer scene]];
     }
+}
+
+-(void) changeScene: (id) layer
+{
+	BOOL useLoadingScene = YES;
+	if (useLoadingScene)
+	{
+		[[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
+	}
+	else
+	{
+		[[CCDirector sharedDirector] replaceScene:layer];
+	}
+}
+
+-(void) onEnter
+{
+	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	// must call super here:
+	[super onEnter];
+}
+
+-(void) onEnterTransitionDidFinish
+{
+	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	// must call super here:
+	[super onEnterTransitionDidFinish];
+}
+
+-(void) onExit
+{
+	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	// must call super here:
+	[super onExit];
+}
+
+-(void) onExitTransitionDidStart
+{
+	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	// must call super here:
+	[super onExitTransitionDidStart];
 }
 
 -(void) dealloc
