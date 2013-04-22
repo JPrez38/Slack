@@ -31,7 +31,6 @@
 		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         background.opacity=156;
 		[self addChild:background];
-         
         
         slackline = [CCSprite spriteWithFile:@"redslackline.png"];
         [self addChild:slackline z:0 tag:1];
@@ -137,8 +136,7 @@
 		CGSize size = [CCDirector sharedDirector].winSize;
 		label.position = CGPointMake(size.width / 2, size.height / 2);
 		[self addChild:label];
-        //sleep(3);
-        [self changeScene:[MainMenuLayer scene]];
+        [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
     }
 }
 
