@@ -107,12 +107,13 @@
 	
 	// assigning the modified position back
 	player.position = pos;
-    [self checkForFall];
+    [self checkForFall:@"standing"];
     
     KKTouch* touch;
     CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
     {
         if ([background containsPoint:touch.location]) {
+            [self checkForFall:@"walking"];
             [self takeStep];
         }
     }
@@ -125,58 +126,19 @@
     score+=1;
 }
 
--(void) checkForFall
+-(void) checkForFall: (NSString*) state
 {
-    // Assumption: both player and spider images are squares.
-    //float playerposition = player.texture.contentSize.width;
-	//CCSprite* spider = [spiders lastObject];
-    //float spiderImageSize = spider.texture.contentSize.width;
-    //float playerCollisionRadius = playerImageSize * 0.4f;
-    //float spiderCollisionRadius = spiderImageSize * 0.4f;
-	
-    // This collision distance will roughly equal the image shapes.
-    //float maxCollisionDistance = playerCollisionRadius + spiderCollisionRadius;
-	
-	/*
-    int numSpiders = spiders.count;
-    for (int i = 0; i < numSpiders; i++)
-    {
-        spider = [spiders objectAtIndex:i];
-		
-        if (spider.numberOfRunningActions == 0)
-        {
-            // This spider isn't even moving so we can skip checking it.
-			continue;
-        }
-		
-        // Get the distance between player and spider.
-        float actualDistance = ccpDistance(player.position, spider.position);
-		
-        // Are the two objects closer than allowed?
-        if (actualDistance < maxCollisionDistance)
-        {
-            
-            // Game Over (just restart the game for now)
-            [self resetGame];
-            break;
-        }
-    }
-     */
     CGSize screenSize = [CCDirector sharedDirector].winSize;
     CGPoint middle = CGPointMake(screenSize.width / 2, 0);
     float actualDistance = ccpDistance(player.position, middle);
-    if (fabsf(actualDistance)>=60){
+    if (fabsf(actualDistance)>=60 || ([state isEqualToString:@"walking"] && fabsf(actualDistance >= 40))){
+    //if (fabsf(actualDistance)>=60){
         CCLabelTTF* label = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Marker Felt" fontSize:64];
 		CGSize size = [CCDirector sharedDirector].winSize;
 		label.position = CGPointMake(size.width / 2, size.height / 2);
 		[self addChild:label];
-        KKTouch* touch;
-        CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
-        {
-            if ([background containsPoint:touch.location]) {
-                 [self changeScene:[MainMenuLayer scene]];
-            }
-        }
+        //sleep(3);
+        [self changeScene:[MainMenuLayer scene]];
     }
 }
 
