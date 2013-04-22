@@ -49,6 +49,10 @@
 		439F282A1724ABF20036C454 /* bitmapfont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 439F28231724ABF10036C454 /* bitmapfont.fnt */; };
 		439F282B1724ABF20036C454 /* bitmapfont.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F28241724ABF10036C454 /* bitmapfont.png */; };
 		439F282C1724ABF20036C454 /* bitmapfont.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F28241724ABF10036C454 /* bitmapfont.png */; };
+		439F282E1724B7120036C454 /* BG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F282D1724B7120036C454 /* BG@2x.png */; };
+		439F282F1724B7120036C454 /* BG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F282D1724B7120036C454 /* BG@2x.png */; };
+		439F28311724B75B0036C454 /* BG1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F28301724B75A0036C454 /* BG1@2x.png */; };
+		439F28321724B75B0036C454 /* BG1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F28301724B75A0036C454 /* BG1@2x.png */; };
 		43D87E5A1721CF9C005C9840 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E591721CF9C005C9840 /* MainMenuLayer.m */; };
 		43D87E5B1721CF9C005C9840 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E591721CF9C005C9840 /* MainMenuLayer.m */; };
 		43D87E5E1721D048005C9840 /* AchievementModeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D87E5D1721D048005C9840 /* AchievementModeLayer.m */; };
@@ -124,6 +128,8 @@
 		439F28221724ABF00036C454 /* bitmapfont-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bitmapfont-hd.png"; sourceTree = "<group>"; };
 		439F28231724ABF10036C454 /* bitmapfont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bitmapfont.fnt; sourceTree = "<group>"; };
 		439F28241724ABF10036C454 /* bitmapfont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmapfont.png; sourceTree = "<group>"; };
+		439F282D1724B7120036C454 /* BG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BG@2x.png"; sourceTree = "<group>"; };
+		439F28301724B75A0036C454 /* BG1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BG1@2x.png"; path = "Resources/BG1@2x.png"; sourceTree = "<group>"; };
 		43D87E581721CF9C005C9840 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		43D87E591721CF9C005C9840 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		43D87E5C1721D048005C9840 /* AchievementModeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementModeLayer.h; sourceTree = "<group>"; };
@@ -321,6 +327,7 @@
 				43D87E651721D077005C9840 /* HighScoreLayer.m */,
 				43661294171B8B86002D9F70 /* PlayLayer.h */,
 				43661295171B8B86002D9F70 /* PlayLayer.m */,
+				439F28301724B75A0036C454 /* BG1@2x.png */,
 				DCC1A38D13A94F1A005BD75D /* AppDelegate.h */,
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
 				DCC1A39413A94F1A005BD75D /* Resources */,
@@ -349,6 +356,7 @@
 				439F2807172457800036C454 /* line2.png */,
 				439F2808172457800036C454 /* line.png */,
 				439F2809172457800036C454 /* ball.png */,
+				439F282D1724B7120036C454 /* BG@2x.png */,
 				43661284171B8267002D9F70 /* button2.png */,
 				43661285171B8267002D9F70 /* button1.png */,
 				DCC1A39513A94F1A005BD75D /* config.lua */,
@@ -480,6 +488,8 @@
 				439F28271724ABF20036C454 /* bitmapfont-hd.png in Resources */,
 				439F28291724ABF20036C454 /* bitmapfont.fnt in Resources */,
 				439F282B1724ABF20036C454 /* bitmapfont.png in Resources */,
+				439F282E1724B7120036C454 /* BG@2x.png in Resources */,
+				439F28311724B75B0036C454 /* BG1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +521,8 @@
 				439F28281724ABF20036C454 /* bitmapfont-hd.png in Resources */,
 				439F282A1724ABF20036C454 /* bitmapfont.fnt in Resources */,
 				439F282C1724ABF20036C454 /* bitmapfont.png in Resources */,
+				439F282F1724B7120036C454 /* BG@2x.png in Resources */,
+				439F28321724B75B0036C454 /* BG1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,7 @@
         
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		
-		CCSprite* background = [CCSprite spriteWithFile:@"BG1.png"];
+		background = [CCSprite spriteWithFile:@"BG1.png"];
 		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         background.opacity=156;
 		[self addChild:background];
@@ -109,7 +109,20 @@
 	player.position = pos;
     [self checkForFall];
     
+    KKTouch* touch;
+    CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
+    {
+        if ([background containsPoint:touch.location]) {
+            [self takeStep];
+        }
+    }
+    
 	[scoreLabel setString:[NSString stringWithFormat:@"%i", score]];
+}
+
+- (void) takeStep
+{
+    score+=1;
 }
 
 -(void) checkForFall
@@ -157,8 +170,13 @@
 		CGSize size = [CCDirector sharedDirector].winSize;
 		label.position = CGPointMake(size.width / 2, size.height / 2);
 		[self addChild:label];
-        
-        
+        KKTouch* touch;
+        CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
+        {
+            if ([background containsPoint:touch.location]) {
+                 [self changeScene:[MainMenuLayer scene]];
+            }
+        }
     }
 }
 

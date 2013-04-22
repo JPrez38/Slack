@@ -17,6 +17,7 @@
     CCSprite* rightMovingBar;
     CCSprite* slackline;
     CGPoint playerVelocity;
+    CCSprite* background;
     int score;
 	CCNode<CCLabelProtocol>* scoreLabel;
 }
