@@ -20,6 +20,11 @@
     CCSprite* background;
     int score;
 	CCNode<CCLabelProtocol>* scoreLabel;
+    Boolean gameOver;
+    Boolean swaying;
+    Boolean blowing;
+    int frameCount;
+    NSString *direction;
 }
 
 + (id) scene;

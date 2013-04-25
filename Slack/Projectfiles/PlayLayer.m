@@ -26,6 +26,8 @@
     
         
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
+        gameOver=false;
+        swaying=false;
 		
 		background = [CCSprite spriteWithFile:@"BG1.png"];
 		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
@@ -34,8 +36,7 @@
         
         slackline = [CCSprite spriteWithFile:@"redslackline.png"];
         [self addChild:slackline z:0 tag:1];
-        float imageHeight3 = leftStoppedBar.texture.contentSize.height;
-        slackline.position = CGPointMake(screenSize.width / 2, imageHeight3);
+        slackline.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
         
         player = [CCSprite spriteWithFile:@"ball.png"];
         [self addChild:player z:0 tag:1];
@@ -82,47 +83,130 @@
 
 -(void) update:(ccTime)delta
 {
-	// Keep adding up the playerVelocity to the player's position
-	CGPoint pos = player.position;
-	pos.x += playerVelocity.x;
-	
-	// The Player should also be stopped from going outside the screen
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	float imageWidthHalved = player.texture.contentSize.width * 0.5f;
-	float leftBorderLimit = imageWidthHalved;
-	float rightBorderLimit = screenSize.width - imageWidthHalved;
-	
-	// preventing the player sprite from moving outside the screen
-	if (pos.x < leftBorderLimit)
-	{
-		pos.x = leftBorderLimit;
-		playerVelocity = CGPointZero;
-	}
-	else if (pos.x > rightBorderLimit)
-	{
-		pos.x = rightBorderLimit;
-		playerVelocity = CGPointZero;
-	}
-	
-	// assigning the modified position back
-	player.position = pos;
-    [self checkForFall:@"standing"];
+    if (gameOver == false){
+        // Keep adding up the playerVelocity to the player's position
+        CGPoint pos = player.position;
+        pos.x += playerVelocity.x;
+        
+        // The Player should also be stopped from going outside the screen
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        float imageWidthHalved = player.texture.contentSize.width * 0.5f;
+        float leftBorderLimit = imageWidthHalved;
+        float rightBorderLimit = screenSize.width - imageWidthHalved;
+        
+        // preventing the player sprite from moving outside the screen
+        if (pos.x < leftBorderLimit)
+        {
+            pos.x = leftBorderLimit;
+            playerVelocity = CGPointZero;
+        }
+        else if (pos.x > rightBorderLimit)
+        {
+            pos.x = rightBorderLimit;
+            playerVelocity = CGPointZero;
+        }
+        
+        // assigning the modified position back
+        pos.x += [self sway];
+        player.position = pos;
+        [self checkForFall:@"standing"];
+        
+        KKTouch* touch;
+        CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
+        {
+            if ([background containsPoint:touch.location]) {
+                [self checkForFall:@"walking"];
+                [self takeStep];
+            }
+        }
+        
+        [scoreLabel setString:[NSString stringWithFormat:@"%i", score]];
+    }
+}
+
+- (float) sway {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    float adj;
+    float sensitivity=.9f;
+    float prob=.1;
+    /*
+    int rand = arc4random()%10;
+    //int direction=arc4random()%2;
+    ///NSLog(@"%d", direction);
+    if (prob*10 >=rand || (swaying)){
+        if (!swaying) {
+            swaying=true;
+        }
+        if (player.position.x < screenSize.width/2) {
+            adj= sensitivity;
+        }
+        else if (player.position.x > screenSize.width/2){
+            adj = -sensitivity;
+        }
+        else {
+            adj=0;
+        }
+        frameCount+=1;
+        if (frameCount >=30 && swaying) {
+            swaying=false;
+            frameCount=0;
+        }
+    }*/
+    adj += [self wind];
+    return adj;
+}
+
+- (float) wind {
+    float windadj=0;
+    float sensitivity=2.0f;
+    float prob=.003;
     
-    KKTouch* touch;
-    CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
-    {
-        if ([background containsPoint:touch.location]) {
-            [self checkForFall:@"walking"];
-            [self takeStep];
+    int rand = arc4random()%1000;
+    NSLog(@"%d",rand);
+    if (blowing==true){
+        
+    }
+    
+    
+    if (prob*1000 >=rand || (blowing)){
+        NSLog(@"hey");
+        if (!blowing) {
+            blowing=true;
+            NSLog(@"yo");
+        }
+        int randdir=arc4random()%2;
+        //NSLog(@"%d", randdir);
+        if ((randdir >= 1 && [direction isEqual:@"none"]) || [direction isEqual:@"right"]){
+            windadj=sensitivity;
+            direction=@"right";
+        }
+        else if ((randdir < 1 && [direction isEqual:@"none"]) || [direction isEqual:@"left"]) {
+            windadj= -sensitivity;
+            direction=@"left";
+        }
+        frameCount+=1;
+        if (frameCount%4) {
+            //sensitivity+=1.0f;
+        }
+        if (frameCount >=20 && blowing) {
+            blowing=false;
+            frameCount=0;
+            direction=@"none";
+            //sensitivity=0.0f;
         }
     }
     
-	[scoreLabel setString:[NSString stringWithFormat:@"%i", score]];
+    return windadj;
 }
 
 - (void) takeStep
 {
     score+=1;
+}
+
+- (float) slip {
+    float slipadj;
+    return slipadj;
 }
 
 -(void) checkForFall: (NSString*) state
@@ -131,6 +215,7 @@
     CGPoint middle = CGPointMake(screenSize.width / 2, 0);
     float actualDistance = ccpDistance(player.position, middle);
     if (fabsf(actualDistance)>=60 || ([state isEqualToString:@"walking"] && fabsf(actualDistance >= 40))){
+        gameOver=true;
     //if (fabsf(actualDistance)>=60){
         CCLabelTTF* label = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Marker Felt" fontSize:64];
 		CGSize size = [CCDirector sharedDirector].winSize;
@@ -144,12 +229,27 @@
 -(void) accelerometer:(UIAccelerometer *)accelerometer
         didAccelerate:(UIAcceleration *)acceleration
 {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
 	// controls how quickly velocity decelerates (lower = quicker to change direction)
-	float deceleration = 0.4f;
+	float deceleration = 0.5f;
 	// determines how sensitive the accelerometer reacts (higher = more sensitive)
-	float sensitivity = 6.0f;
+	float sensitivity;
 	// how fast the velocity can be at most
 	float maxVelocity = 100;
+    float middle =screenSize.width;
+    float distance = fabsf(player.position.x-middle);
+    
+    if (distance <= 30){
+        sensitivity=2.0f;
+    }
+    
+    if (distance > 30 && distance <= 40 ) {
+        sensitivity=3.0f;
+    }
+    
+    if (distance > 40 && distance <= 60 ) {
+        sensitivity=4.0f;
+    }
 	
 	// adjust velocity based on current accelerometer acceleration
 	playerVelocity.x = playerVelocity.x * deceleration + acceleration.x * sensitivity;

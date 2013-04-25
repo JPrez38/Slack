@@ -27,6 +27,12 @@
 		43767ABE171DEF4900D298D0 /* SlacklineMenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABB171DEF4900D298D0 /* SlacklineMenu2.png */; };
 		43767ABF171DEF4900D298D0 /* SlacklineMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABC171DEF4900D298D0 /* SlacklineMenu.png */; };
 		43767AC0171DEF4900D298D0 /* SlacklineMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 43767ABC171DEF4900D298D0 /* SlacklineMenu.png */; };
+		438C72381726EA75007BD043 /* MainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 438C72351726EA75007BD043 /* MainMenu.png */; };
+		438C72391726EA75007BD043 /* MainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 438C72351726EA75007BD043 /* MainMenu.png */; };
+		438C723A1726EA75007BD043 /* MainMenu1.png in Resources */ = {isa = PBXBuildFile; fileRef = 438C72361726EA75007BD043 /* MainMenu1.png */; };
+		438C723B1726EA75007BD043 /* MainMenu1.png in Resources */ = {isa = PBXBuildFile; fileRef = 438C72361726EA75007BD043 /* MainMenu1.png */; };
+		438C723C1726EA75007BD043 /* MainMenu1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 438C72371726EA75007BD043 /* MainMenu1@2x.png */; };
+		438C723D1726EA75007BD043 /* MainMenu1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 438C72371726EA75007BD043 /* MainMenu1@2x.png */; };
 		439F280A172457800036C454 /* line2.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2807172457800036C454 /* line2.png */; };
 		439F280B172457800036C454 /* line2.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2807172457800036C454 /* line2.png */; };
 		439F280C172457800036C454 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F2808172457800036C454 /* line.png */; };
@@ -118,6 +124,9 @@
 		43767AB2171DEA5B00D298D0 /* slack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slack.png; sourceTree = "<group>"; };
 		43767ABB171DEF4900D298D0 /* SlacklineMenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SlacklineMenu2.png; sourceTree = "<group>"; };
 		43767ABC171DEF4900D298D0 /* SlacklineMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SlacklineMenu.png; sourceTree = "<group>"; };
+		438C72351726EA75007BD043 /* MainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainMenu.png; sourceTree = "<group>"; };
+		438C72361726EA75007BD043 /* MainMenu1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainMenu1.png; sourceTree = "<group>"; };
+		438C72371726EA75007BD043 /* MainMenu1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MainMenu1@2x.png"; sourceTree = "<group>"; };
 		439F2807172457800036C454 /* line2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line2.png; sourceTree = "<group>"; };
 		439F2808172457800036C454 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		439F2809172457800036C454 /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
@@ -342,6 +351,9 @@
 		DCC1A39413A94F1A005BD75D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				438C72351726EA75007BD043 /* MainMenu.png */,
+				438C72361726EA75007BD043 /* MainMenu1.png */,
+				438C72371726EA75007BD043 /* MainMenu1@2x.png */,
 				439F28301724B75A0036C454 /* BG1@2x.png */,
 				439F28211724ABF00036C454 /* bitmapfont-hd.fnt */,
 				439F28221724ABF00036C454 /* bitmapfont-hd.png */,
@@ -495,6 +507,9 @@
 				439F282E1724B7120036C454 /* BG@2x.png in Resources */,
 				439F28311724B75B0036C454 /* BG1@2x.png in Resources */,
 				439F28341724BD860036C454 /* redslackline@2x.png in Resources */,
+				438C72381726EA75007BD043 /* MainMenu.png in Resources */,
+				438C723A1726EA75007BD043 /* MainMenu1.png in Resources */,
+				438C723C1726EA75007BD043 /* MainMenu1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +544,9 @@
 				439F282F1724B7120036C454 /* BG@2x.png in Resources */,
 				439F28321724B75B0036C454 /* BG1@2x.png in Resources */,
 				439F28351724BD860036C454 /* redslackline@2x.png in Resources */,
+				438C72391726EA75007BD043 /* MainMenu.png in Resources */,
+				438C723B1726EA75007BD043 /* MainMenu1.png in Resources */,
+				438C723D1726EA75007BD043 /* MainMenu1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

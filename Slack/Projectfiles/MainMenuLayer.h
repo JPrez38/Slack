@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 
 @interface MainMenuLayer : CCLayer {
-    
+    CCSprite* background;
 }
 
 + (id) scene;

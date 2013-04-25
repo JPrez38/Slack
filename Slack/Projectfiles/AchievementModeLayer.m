@@ -16,7 +16,10 @@
     
     if ((self = [super init]))
     {
-        NSLog(@"Achievement Mode Called");
+        CCLabelTTF* label = [CCLabelTTF labelWithString:@"Achievement Mode" fontName:@"Marker Felt" fontSize:64];
+		CGSize size = [CCDirector sharedDirector].winSize;
+		label.position = CGPointMake(size.width / 2, size.height / 2+80);
+		[self addChild:label];
         [self setUpMenus];
     }
     return self;
