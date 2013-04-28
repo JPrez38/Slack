@@ -34,7 +34,7 @@
         background.opacity=156;
 		[self addChild:background];
         
-        slackline = [CCSprite spriteWithFile:@"redslackline.png"];
+        slackline = [CCSprite spriteWithFile:@"slackline.png"];
         [self addChild:slackline z:0 tag:1];
         slackline.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
         
