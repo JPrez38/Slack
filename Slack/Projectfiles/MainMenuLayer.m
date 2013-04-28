@@ -28,7 +28,7 @@
     if ((self = [super init]))
     {
         CGSize screenSize = [[CCDirector sharedDirector] winSize];
-		
+		//a
 		background = [CCSprite spriteWithFile:@"MainMenu1.png"];
 		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         //background.opacity=156;
