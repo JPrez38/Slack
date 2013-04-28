@@ -16,11 +16,21 @@
     
     if ((self = [super init]))
     {
-        CCLabelTTF* label = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:64];
+        // Global Variables
+        maxScoresDisplayed = 5;
+        
+        // High Score Label
+        CCLabelTTF* label = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:32];
 		CGSize size = [CCDirector sharedDirector].winSize;
-		label.position = CGPointMake(size.width / 2, size.height / 2+80);
+		label.position = CGPointMake(size.width * 0.5, size.height * 0.7);
 		[self addChild:label];
-        [self setUpMenus];
+        
+        // Get data from plist
+        NSMutableArray *scores = [self readStoredScores];
+        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:50]];
+        [self displayScores:scores];
+        
+        //[self setUpMenus];
     }
     return self;
 }
@@ -60,6 +70,99 @@
     if (parameter==1) {
         [[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
         
+    }
+}
+
+- (NSMutableArray*) readStoredScores
+{
+    // Access the high scores plist
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"highscore.plist"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if (![fileManager fileExistsAtPath: path])
+    {
+        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"highscore" ofType:@"plist"];
+        [fileManager copyItemAtPath:bundle toPath: path error:&error];
+    }
+    
+    // Read the plist
+    NSMutableArray *scores = [[NSMutableArray alloc] initWithContentsOfFile: path];
+    //    NSLog(@"Scores: %@", scores);
+    return scores;
+}
+
+- (void) submitNameToHighScore:(NSString*)username withScore:(NSNumber*)userscore
+{
+    // Access the high scores plist
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"highscore.plist"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if (![fileManager fileExistsAtPath: path])
+    {
+        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"highscore" ofType:@"plist"];
+        [fileManager copyItemAtPath:bundle toPath: path error:&error];
+    }
+    
+    NSMutableArray *scores = [[NSMutableArray alloc] initWithContentsOfFile: path];
+    NSLog(@"Scores: %@", scores);
+    
+    // Checks if score qualifies to be submitted to high score
+    NSMutableDictionary *lowestScorer = [scores objectAtIndex:scores.count - 1];
+    NSNumber *lowestScore = [lowestScorer objectForKey:@"Score"];
+    if (userscore >= lowestScore || scores.count < maxScoresDisplayed) {
+        NSMutableDictionary *newScore = [[NSMutableDictionary alloc] init];
+        [newScore setObject:username forKey:@"Name"];
+        [newScore setObject:userscore forKey:@"Score"];
+        
+        int scoreIndex = scores.count;
+        
+        for (int i = scores.count - 1; i >=0; i--) {
+            if ([[scores objectAtIndex:i] valueForKey:@"Score"] >= userscore) {
+                scoreIndex = i;
+                break;
+            }
+        }
+        
+        [scores insertObject:newScore atIndex:scoreIndex];
+        [scores writeToFile:path atomically:YES];
+    }
+}
+
+- (void) displayScores: (NSMutableArray*) scores
+{
+    CGSize size = [CCDirector sharedDirector].winSize;
+    int baseHeightPosition = size.height * 0.6;
+    int heightSpacing = size.height * 0.1;
+    int firstColumnPosition = size.width * 0.3;
+    int secondColumnPosition = size.width * 0.7;
+    
+    int numScoresDisplayed = maxScoresDisplayed;
+    if (scores.count < maxScoresDisplayed) numScoresDisplayed = scores.count;
+    
+    for (int i = 0; i < numScoresDisplayed; i++)
+    {
+        NSMutableDictionary *scoreDict = [scores objectAtIndex:i];
+        
+        NSString* userName = [scoreDict objectForKey:@"Name"];
+        NSNumber* userScore = [scoreDict objectForKey:@"Score"];
+        
+        int heightPosition = baseHeightPosition - heightSpacing * i;
+        
+        CCLabelTTF* nameLabel = [CCLabelTTF labelWithString:userName fontName:@"Marker Felt" fontSize:24];
+        nameLabel.position = CGPointMake(firstColumnPosition, heightPosition);
+        [self addChild:nameLabel];
+        
+        CCLabelTTF* scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@", userScore] fontName:@"Marker Felt" fontSize:24];
+        scoreLabel.position = CGPointMake(secondColumnPosition, heightPosition);
+        [self addChild:scoreLabel];
     }
 }
 

@@ -10,8 +10,12 @@
 #import "cocos2d.h"
 
 @interface HighScoreLayer : CCLayer {
-    
+    unsigned int maxScoresDisplayed;
 }
+
+- (NSMutableArray*) readStoredScores;
+- (void) submitNameToHighScore:(NSString*)username withScore:(NSNumber*)userscore;
+- (void) displayScores:(NSMutableArray*) scores;
 
 + (id) scene;
 
