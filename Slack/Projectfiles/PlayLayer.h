@@ -16,6 +16,10 @@
     CCSprite* leftMovingBar;
     CCSprite* rightMovingBar;
     CCSprite* slackline;
+    CCSprite* lowerbody;
+    CCSprite* upperbody;
+    CCSprite* tree1;
+    CCSprite* tree2;
     CGPoint playerVelocity;
     CCSprite* background;
     int score;

@@ -29,37 +29,60 @@
         gameOver=false;
         swaying=false;
 		
-		background = [CCSprite spriteWithFile:@"grass_bkgrd.png"];
+		background = [CCSprite spriteWithFile:@"grass_bkgrd1.png"];
 		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
-        background.opacity=156;
-		[self addChild:background];
+        //background.opacity=156;
+		[self addChild:background z:-1];
         
-        slackline = [CCSprite spriteWithFile:@"slackline.png"];
+        slackline = [CCSprite spriteWithFile:@"slackline1.png"];
         [self addChild:slackline z:0 tag:1];
         slackline.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
         
+        lowerbody = [CCSprite spriteWithFile:@"lowerBod0.png"];
+        [self addChild:lowerbody z:1 tag:1];
+        lowerbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        
+        upperbody = [CCSprite spriteWithFile:@"upperBod0.png"];
+        [self addChild:upperbody z:1 tag:1];
+        upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        
+        tree1 = [CCSprite spriteWithFile:@"tree01.png"];
+        [self addChild:tree1 z:0 tag:0];
+        tree1.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        
+        tree2 = [CCSprite spriteWithFile:@"tree02.png"];
+        [self addChild:tree2 z:0 tag:0];
+        tree2.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        
+        
         player = [CCSprite spriteWithFile:@"ball.png"];
+        //player.opacity=0;
         [self addChild:player z:0 tag:1];
         float imageHeight = player.texture.contentSize.height;
         player.position = CGPointMake(screenSize.width / 2, imageHeight / 2);
         
         leftStoppedBar = [CCSprite spriteWithFile:@"line.png"];
+        //leftStoppedBar.opacity=0;
         [self addChild:leftStoppedBar z:0 tag:1];
         float imageHeight1 = leftStoppedBar.texture.contentSize.height;
         leftStoppedBar.position = CGPointMake(screenSize.width / 2-60, imageHeight1 / 2);
         
         rightStoppedBar = [CCSprite spriteWithFile:@"line.png"];
+        //rightStoppedBar.opacity=0;
         [self addChild:rightStoppedBar z:0 tag:1];
         rightStoppedBar.position = CGPointMake(screenSize.width / 2+60, imageHeight1 / 2);
         
         leftMovingBar = [CCSprite spriteWithFile:@"line2.png"];
+        //leftMovingBar.opacity=0;
         [self addChild:leftMovingBar z:0 tag:1];
         float imageHeight2 = leftMovingBar.texture.contentSize.height;
         leftMovingBar.position = CGPointMake(screenSize.width / 2+40, imageHeight2 / 2);
         
         rightMovingBar = [CCSprite spriteWithFile:@"line2.png"];
+        //rightMovingBar.opacity=0;
         [self addChild:rightMovingBar z:0 tag:1];
         rightMovingBar.position = CGPointMake(screenSize.width / 2-40, imageHeight2 / 2);
+         
 		
 		// schedules the –(void) update:(ccTime)delta method to be called every frame
 		[self scheduleUpdate];
