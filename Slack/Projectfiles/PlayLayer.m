@@ -157,10 +157,10 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (float) sway {
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    //CGSize screenSize = [[CCDirector sharedDirector] winSize];
     float adj;
-    float sensitivity=.9f;
-    float prob=.1;
+    //float sensitivity=.9f;
+    //float prob=.1;
     /*
     int rand = arc4random()%10;
     //int direction=arc4random()%2;
@@ -258,12 +258,16 @@ static PlayLayer* sharedPlayLayer;
     if (fabsf(actualDistance)>=60 || ([state isEqualToString:@"walking"] && fabsf(actualDistance >= 40))){
         gameOver=true;
     //if (fabsf(actualDistance)>=60){
-        CCLabelTTF* label = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Marker Felt" fontSize:64];
-		CGSize size = [CCDirector sharedDirector].winSize;
-		label.position = CGPointMake(size.width / 2, size.height / 2);
-		[self addChild:label];
-        [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
+        [self gameOver];
     }
+}
+
+- (void) gameOver {
+    CCLabelTTF* label = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Marker Felt" fontSize:64];
+    CGSize size = [CCDirector sharedDirector].winSize;
+    label.position = CGPointMake(size.width / 2, size.height / 2);
+    [self addChild:label];
+    [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
 }
 
 #if KK_PLATFORM_IOS

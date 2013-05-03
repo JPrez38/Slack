@@ -14,6 +14,7 @@
     CCSprite* upperbody;
     int count;
     CCAction* myAction;
+    CGSize screenSize;
     
 }
 

@@ -25,10 +25,12 @@
 		label.position = CGPointMake(size.width * 0.5, size.height * 0.9);
 		[self addChild:label];
         
-        
         // Get data from plist
         NSMutableArray *scores = [self readStoredScores];
         [self submitNameToHighScore:@"Abe Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
         [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
         [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
         [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
@@ -115,7 +117,7 @@
     [newScore setObject:userscore forKey:@"Score"];
     
     if (scores.count == 0) {
-        scoreIndex = 0;
+        [scores insertObject:newScore atIndex:0];
     }
     else {
         NSMutableDictionary *lowestScorer = [scores objectAtIndex:scores.count - 1];
@@ -131,10 +133,16 @@
                     break;
                 }
             }
+            
+            [scores insertObject:newScore atIndex:scoreIndex];
         }
     }
     
-    [scores insertObject:newScore atIndex:scoreIndex];
+    NSRange theRange;
+    theRange.location = 0;
+    theRange.length = min([scores count], maxScoresDisplayed);
+    
+    scores = [[scores subarrayWithRange:theRange] mutableCopy];
     [scores writeToFile:path atomically:YES];
     NSLog(@"New Scores: %@", scores);
 }

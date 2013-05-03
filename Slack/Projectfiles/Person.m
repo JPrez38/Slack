@@ -28,16 +28,18 @@ static Person* sharedPerson;
     
     if ((self = [super initWithFile:@"lowerBod0.png"]))
 	{
-        CGSize screenSize = [[CCDirector sharedDirector] winSize];
+        screenSize = [[CCDirector sharedDirector] winSize];
         sharedPerson=self;
         
         count=0;
         [self legs];
     
         upperbody = [CCSprite spriteWithFile:@"upperBod0.png"];
-        [self addChild:upperbody z:1 tag:1];
         upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        [self addChild:upperbody z:1 tag:1];
         
+        
+        [self performSelector:@selector(moveArms) withObject:nil afterDelay:5.0f];
         [self scheduleUpdate];
     }
     return self;
@@ -64,6 +66,13 @@ static Person* sharedPerson;
         //performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0
         [[PlayLayer sharedPlayLayer] incrementScore];
     }
+}
+
+- (void) moveArms {
+    [self removeChild:upperbody];
+    upperbody = [CCSprite spriteWithFile:@"upperBod9.png"];
+    upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+    [self addChild:upperbody];
 }
 
 -(void) update:(ccTime)delta
