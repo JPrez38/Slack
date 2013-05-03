@@ -12,9 +12,14 @@
 @interface Person : CCSprite {
     CCSprite* lowerbody;
     CCSprite* upperbody;
+    int count;
+    CCAction* myAction;
+    
 }
-@property Boolean walking;
+
 
 + (id) person;
++(Person*) sharedPerson;
+- (void) walk;
 
 @end

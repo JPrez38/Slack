@@ -31,8 +31,13 @@
     Boolean blowing;
     int frameCount;
     NSString *direction;
+    int time;
+    int count;
+    
 }
 
 + (id) scene;
+- (void) incrementScore;
++ (PlayLayer *) sharedPlayLayer;
 
 @end

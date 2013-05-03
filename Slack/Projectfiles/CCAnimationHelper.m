@@ -26,7 +26,6 @@
 		CGSize texSize = texture.contentSize;
 		CGRect texRect = CGRectMake(0, 0, texSize.width, texSize.height);
 		CCSpriteFrame* frame = [CCSpriteFrame frameWithTexture:texture rect:texRect];
-		
 		[frames addObject:frame];
 	}
 	

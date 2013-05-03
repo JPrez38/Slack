@@ -25,13 +25,15 @@ static PlayLayer* sharedPlayLayer;
     
     if ((self = [super init]))
     {
+        sharedPlayLayer=self;
         NSLog(@"PlayLayer Screen Called");
         #if KK_PLATFORM_IOS
             //self.isAccelerometerEnabled = YES;
             _accelerometerEnabled=YES;
             _touchEnabled = YES;
         #endif
-    
+        
+        time=0;
         
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
         gameOver=false;
@@ -137,7 +139,6 @@ static PlayLayer* sharedPlayLayer;
         pos.x += [self sway];
         player.position = pos;
         [self checkForFall:@"standing"];
-        
         KKTouch* touch;
         CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
         {
@@ -145,9 +146,13 @@ static PlayLayer* sharedPlayLayer;
                 [self checkForFall:@"walking"];
                 [self takeStep];
             }
+        
         }
         
         [scoreLabel setString:[NSString stringWithFormat:@"%i", score]];
+    }
+    else {
+        //[[Person sharedPerson] stop];
     }
 }
 
@@ -189,17 +194,17 @@ static PlayLayer* sharedPlayLayer;
     float prob=.003;
     
     int rand = arc4random()%1000;
-    NSLog(@"%d",rand);
+    //NSLog(@"%d",rand);
     if (blowing==true){
         
     }
     
     
     if (prob*1000 >=rand || (blowing)){
-        NSLog(@"hey");
+        //NSLog(@"hey");
         if (!blowing) {
             blowing=true;
-            NSLog(@"yo");
+            //NSLog(@"yo");
         }
         int randdir=arc4random()%2;
         //NSLog(@"%d", randdir);
@@ -228,8 +233,16 @@ static PlayLayer* sharedPlayLayer;
 
 - (void) takeStep
 {
-    person.walking=true;
-    score+=1;
+    [[Person sharedPerson] walk];
+}
+
+- (void) incrementScore {
+    score++;
+    [self performSelector:@selector(increment) withObject:nil afterDelay:1.2f];
+}
+
+- (void) increment {
+    score++;
 }
 
 - (float) slip {
