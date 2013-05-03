@@ -12,10 +12,18 @@
 
 @implementation HighScoreLayer
 
+static HighScoreLayer* sharedHighScoreLayer;
++(HighScoreLayer*) sharedHighScoreLayer
+{
+	NSAssert(sharedHighScoreLayer != nil, @"GameScene instance not yet initialized!");
+	return sharedHighScoreLayer;
+}
+
 - (id) init {
     
     if ((self = [super init]))
     {
+        sharedHighScoreLayer=self;
         // Global Variables
         maxScoresDisplayed = 5;
         
@@ -59,6 +67,9 @@
 	CCMenuItemImage * returnMenuItem = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png" selectedImage: @"SlacklineMenu2.png"                                                                 target:self selector:setMainMenuSelector];
     
     returnMenuItem.tag=1;
+    CGSize size = [CCDirector sharedDirector].winSize;
+    returnMenuItem.position = CGPointMake(size.width * .5, size.height *.2);
+    
     
 	// add the menu to your scene
 	[self addChild:returnMenuItem];
