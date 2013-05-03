@@ -18,5 +18,6 @@
 - (void) displayScores:(NSMutableArray*) scores;
 
 + (id) scene;
++ (HighScoreLayer*) sharedHighScoreLayer;
 
 @end

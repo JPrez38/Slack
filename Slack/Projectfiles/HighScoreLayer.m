@@ -15,7 +15,8 @@
 static HighScoreLayer* sharedHighScoreLayer;
 +(HighScoreLayer*) sharedHighScoreLayer
 {
-	NSAssert(sharedHighScoreLayer != nil, @"GameScene instance not yet initialized!");
+	if (sharedHighScoreLayer ==nil)
+        [self scene];
 	return sharedHighScoreLayer;
 }
 
@@ -25,7 +26,7 @@ static HighScoreLayer* sharedHighScoreLayer;
     {
         sharedHighScoreLayer=self;
         // Global Variables
-        maxScoresDisplayed = 5;
+        maxScoresDisplayed = 6;
         
         // High Score Label
         CCLabelTTF* label = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:32];
@@ -35,13 +36,13 @@ static HighScoreLayer* sharedHighScoreLayer;
         
         // Get data from plist
         NSMutableArray *scores = [self readStoredScores];
-        [self submitNameToHighScore:@"Abe Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
-        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
-        [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
-        [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
-        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
-        [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
-        [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        [self submitNameToHighScore:@"Abe Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+        [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+        //[self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        //[self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        //[self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        //[self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
         
         scores = [self readStoredScores];
         NSLog(@"Displayed Scores: %@", scores);

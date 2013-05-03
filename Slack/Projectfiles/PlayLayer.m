@@ -10,6 +10,7 @@
 #import "MainMenuLayer.h"
 #import "LoadingScreen.h"
 #import "Person.h"
+#import "HighScoreLayer.h"
 
 
 @implementation PlayLayer
@@ -268,6 +269,7 @@ static PlayLayer* sharedPlayLayer;
     label.position = CGPointMake(size.width / 2, size.height / 2);
     [self addChild:label];
     [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
+    [[HighScoreLayer sharedHighScoreLayer] submitNameToHighScore:@"GAYYY" withScore:[NSNumber numberWithInt:score]];
 }
 
 #if KK_PLATFORM_IOS
