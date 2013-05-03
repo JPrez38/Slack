@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in `seq 10 16`;
+do
+  echo $i
+  convert "upperBod (0.00.00.$i).png" -resize 25% upperBod$i.png
+  convert "upperBod (0.00.00.$i).png" -resize 50% upperBod$i@2x.png
+done

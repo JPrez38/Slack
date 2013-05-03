@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Person.h"
 
 @interface PlayLayer : CCLayer {
     CCSprite* player;
@@ -18,6 +19,7 @@
     CCSprite* slackline;
     CCSprite* lowerbody;
     CCSprite* upperbody;
+    Person* person;
     CCSprite* tree1;
     CCSprite* tree2;
     CGPoint playerVelocity;

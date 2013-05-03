@@ -9,9 +9,17 @@
 #import "PlayLayer.h"
 #import "MainMenuLayer.h"
 #import "LoadingScreen.h"
+#import "Person.h"
 
 
 @implementation PlayLayer
+
+static PlayLayer* sharedPlayLayer;
++ (PlayLayer*) sharedPlayLayer
+{
+	NSAssert(sharedPlayLayer != nil, @"GameScene instance not yet initialized!");
+	return sharedPlayLayer;
+}
 
 - (id) init {
     
@@ -38,13 +46,9 @@
         [self addChild:slackline z:0 tag:1];
         slackline.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
         
-        lowerbody = [CCSprite spriteWithFile:@"lowerBod0.png"];
-        [self addChild:lowerbody z:1 tag:1];
-        lowerbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
-        
-        upperbody = [CCSprite spriteWithFile:@"upperBod0.png"];
-        [self addChild:upperbody z:1 tag:1];
-        upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        person = [Person person];
+		person.position = CGPointMake(screenSize.width/2, screenSize.height / 2);
+		[self addChild:person z:10];
         
         tree1 = [CCSprite spriteWithFile:@"tree01.png"];
         [self addChild:tree1 z:0 tag:0];
@@ -224,6 +228,7 @@
 
 - (void) takeStep
 {
+    person.walking=true;
     score+=1;
 }
 

@@ -22,15 +22,22 @@
         // High Score Label
         CCLabelTTF* label = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:32];
 		CGSize size = [CCDirector sharedDirector].winSize;
-		label.position = CGPointMake(size.width * 0.5, size.height * 0.7);
+		label.position = CGPointMake(size.width * 0.5, size.height * 0.9);
 		[self addChild:label];
+        
         
         // Get data from plist
         NSMutableArray *scores = [self readStoredScores];
-        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:50]];
+        [self submitNameToHighScore:@"Abe Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 100]];
+        
+        scores = [self readStoredScores];
+        NSLog(@"Displayed Scores: %@", scores);
         [self displayScores:scores];
         
-        //[self setUpMenus];
+        [self setReturnToMainButton];
     }
     return self;
 }
@@ -42,35 +49,22 @@
     return scene;
 }
 
--(void) setUpMenus
+-(void) setReturnToMainButton
 {
     
 	// Create some menu items
-	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-                                                         selectedImage: @"SlacklineMenu2.png"
-                                                                target:self
-                                                              selector:@selector(doSomething:)];
-    menuItem1.tag=1;
+    SEL setMainMenuSelector = sel_registerName("setReturnToMainAction:");
+	CCMenuItemImage * returnMenuItem = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png" selectedImage: @"SlacklineMenu2.png"                                                                 target:self selector:setMainMenuSelector];
     
-    
-	// Create a menu and add your menu items to it
-	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
-    
-	// Arrange the menu items vertically
-	[myMenu alignItemsVertically];
+    returnMenuItem.tag=1;
     
 	// add the menu to your scene
-	[self addChild:myMenu];
+	[self addChild:returnMenuItem];
 }
 
-- (void) doSomething: (CCMenuItem  *) menuItem
+- (void) returnToMainAction: (CCMenuItem  *) menuItem
 {
-	int parameter = menuItem.tag;
-    //psst! you can create a wrapper around your init method to pass in parameters
-    if (parameter==1) {
-        [[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
-        
-    }
+	[[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
 }
 
 - (NSMutableArray*) readStoredScores
@@ -112,37 +106,46 @@
     }
     
     NSMutableArray *scores = [[NSMutableArray alloc] initWithContentsOfFile: path];
-    NSLog(@"Scores: %@", scores);
+    NSLog(@"Old Scores: %@", scores);
     
-    // Checks if score qualifies to be submitted to high score
-    NSMutableDictionary *lowestScorer = [scores objectAtIndex:scores.count - 1];
-    NSNumber *lowestScore = [lowestScorer objectForKey:@"Score"];
-    if (userscore >= lowestScore || scores.count < maxScoresDisplayed) {
-        NSMutableDictionary *newScore = [[NSMutableDictionary alloc] init];
-        [newScore setObject:username forKey:@"Name"];
-        [newScore setObject:userscore forKey:@"Score"];
-        
-        int scoreIndex = scores.count;
-        
-        for (int i = scores.count - 1; i >=0; i--) {
-            if ([[scores objectAtIndex:i] valueForKey:@"Score"] >= userscore) {
+    // Checks if score qualifies to be submitted to high scored
+    int scoreIndex;
+    NSMutableDictionary *newScore = [[NSMutableDictionary alloc] init];
+    [newScore setObject:username forKey:@"Name"];
+    [newScore setObject:userscore forKey:@"Score"];
+    
+    if (scores.count == 0) {
+        scoreIndex = 0;
+    }
+    else {
+        NSMutableDictionary *lowestScorer = [scores objectAtIndex:scores.count - 1];
+        NSNumber *lowestScore = [lowestScorer objectForKey:@"Score"];
+        if (userscore >= lowestScore || scores.count < maxScoresDisplayed) {
+            scoreIndex = scores.count;
+            
+            for (int i = scores.count - 1; i >=0; i--) {
                 scoreIndex = i;
-                break;
+                int currentScore = [[[scores objectAtIndex:i] valueForKey:@"Score"] intValue];
+                if (currentScore >= [userscore intValue]) {
+                    scoreIndex = i + 1;
+                    break;
+                }
             }
         }
-        
-        [scores insertObject:newScore atIndex:scoreIndex];
-        [scores writeToFile:path atomically:YES];
     }
+    
+    [scores insertObject:newScore atIndex:scoreIndex];
+    [scores writeToFile:path atomically:YES];
+    NSLog(@"New Scores: %@", scores);
 }
 
 - (void) displayScores: (NSMutableArray*) scores
 {
     CGSize size = [CCDirector sharedDirector].winSize;
-    int baseHeightPosition = size.height * 0.6;
+    int baseHeightPosition = size.height * 0.8;
     int heightSpacing = size.height * 0.1;
     int firstColumnPosition = size.width * 0.3;
-    int secondColumnPosition = size.width * 0.7;
+    int secondColumnPosition = size.width * 0.8;
     
     int numScoresDisplayed = maxScoresDisplayed;
     if (scores.count < maxScoresDisplayed) numScoresDisplayed = scores.count;
