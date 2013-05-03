@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in `seq 10 17`;
+do
+  echo $i
+  convert falling_02_000$i.png -resize 25% falling_02_$i.png
+  convert falling_02_000$i.png -resize 50% falling_02_$i@2x.png
+done
