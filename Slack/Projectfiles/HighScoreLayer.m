@@ -36,6 +36,7 @@ static HighScoreLayer* sharedHighScoreLayer;
         
         // Get data from plist
         NSMutableArray *scores = [self readStoredScores];
+        /*
         [self submitNameToHighScore:@"Abe Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
         [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
         [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
@@ -43,6 +44,7 @@ static HighScoreLayer* sharedHighScoreLayer;
         [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
         [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
         [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+         */
         
         scores = [self readStoredScores];
         NSLog(@"Displayed Scores: %@", scores);
@@ -64,20 +66,28 @@ static HighScoreLayer* sharedHighScoreLayer;
 {
     
 	// Create some menu items
-    SEL setMainMenuSelector = sel_registerName("setReturnToMainAction:");
-	CCMenuItemImage * returnMenuItem = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png" selectedImage: @"SlacklineMenu2.png"                                                                 target:self selector:setMainMenuSelector];
+    //    SEL setMainMenuSelector = sel_registerName("setReturnToMainAction:");
+	CCMenuItemImage * returnMenuItem = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png" selectedImage: @"SlacklineMenu2.png" target:self selector:@selector(returnToMainAction:)];
     
     returnMenuItem.tag=1;
     CGSize size = [CCDirector sharedDirector].winSize;
-    returnMenuItem.position = CGPointMake(size.width * .5, size.height *.2);
+    //returnMenuItem.position = CGPointMake(size.width * .5, size.height *.2);
+    CCMenu *myMenu = [CCMenu menuWithItems:returnMenuItem, nil];
+    myMenu.position = CGPointMake(size.width * .5, size.height *.2);
     
     
 	// add the menu to your scene
-	[self addChild:returnMenuItem];
+	[self addChild:myMenu];
+}
+
+- (void) setMainMenuSelector: (CCMenuItem  *) menuItem
+{
+	[[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
 }
 
 - (void) returnToMainAction: (CCMenuItem  *) menuItem
 {
+    NSLog(@"Return to Main Menu pressed");
 	[[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
 }
 

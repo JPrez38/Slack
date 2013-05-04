@@ -33,71 +33,87 @@
         //background.opacity=156;
 		[self addChild:background z:-1];
         [self setUpMenus];
+        
+        personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
+        [self addChild:personBottom z:0 tag:1];
+        personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+        
+        personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
+        [self addChild:personTop z:0 tag:1];
+        personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
     }
     return self;
 }
 
 -(void) setUpMenus
 {
-    
 	// Create some menu items
-	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-                                                         selectedImage: @"SlacklineMenu2.png"
+	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"main_menu_SLACK_01.png"
+                                                         selectedImage: @"main_menu_SLACK_02.png"
+                                                                target:self
+                                                              selector:@selector(doSomething:)];
+    /*
+     CCMenuItemImage * menuItem5 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
+     selectedImage: @"SlacklineMenu2.png"
+     target:self
+     selector:@selector(doSomething:)];
+     */
+	CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"main_menu_SETTINGS_01.png"
+                                                         selectedImage: @"main_menu_SETTINGS_02.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
     
-	CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-                                                         selectedImage: @"SlacklineMenu2.png"
+    CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"main_menu_HIGHSCORES_01.png"
+                                                         selectedImage: @"main_menu_HIGHSCORES_02.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
     
-    
-	CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-                                                         selectedImage: @"SlacklineMenu2.png"
+    CCMenuItemImage * menuItem4 = [CCMenuItemImage itemWithNormalImage:@"main_menu_GETINVOLVED_01.png"
+                                                         selectedImage: @"main_menu_GETINVOLVED_02.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
-    CCMenuItemImage * menuItem4 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-                                                         selectedImage: @"SlacklineMenu2.png"
-                                                                target:self
-                                                              selector:@selector(doSomething:)];
-    CCMenuItemImage * menuItem5 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-                                                         selectedImage: @"SlacklineMenu2.png"
-                                                                target:self
-                                                              selector:@selector(doSomething:)];
-    menuItem1.tag=1;
-    menuItem2.tag=2;
-    menuItem3.tag=3;
-    menuItem4.tag=4;
-    menuItem5.tag=5;
+    menuItem1.tag=1;    //slack
+    //menuItem5.tag=5;
+    menuItem2.tag=2;    //how to
+    menuItem3.tag=3;    //high scores
+    menuItem4.tag=4;    //get involved
     
     
 	// Create a menu and add your menu items to it
-	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, menuItem3,menuItem4,menuItem5, nil];
+	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, menuItem3, menuItem4, nil];
     
-	// Arrange the menu items vertically
-	[myMenu alignItemsVertically];
+    CGSize size = [CCDirector sharedDirector].winSize;
+    NSLog(@"HEIGHT: %f", size.height);
+    NSLog(@"WIDTH: %f", size.width);
     
-	// add the menu to your scene
+    menuItem1.position = ccp(size.width*.5, size.height*.45);
+    menuItem2.position = ccp(size.width*.25, size.height*.25);
+    menuItem3.position = ccp(size.width*.75, size.height*.25);
+    menuItem4.position = ccp(size.width*.5, size.height*.09);
+    myMenu.position = ccp(0,0);
+    
+	// add the menu to scene
 	[self addChild:myMenu];
+    
 }
 
 - (void) doSomething: (CCMenuItem  *) menuItem
 {
 	int parameter = menuItem.tag;
-    //psst! you can create a wrapper around your init method to pass in parameters
+    
     if (parameter==1) {
         [self changeScene:[PlayLayer scene]];
     }
+    // if (parameter==5) {
+    //     [self changeScene:[AchievementModeLayer scene]];
+    // }
     if (parameter==2) {
-        [self changeScene:[AchievementModeLayer scene]];
-    }
-    if (parameter==3) {
         [self changeScene:[HowToLayer scene]];
     }
-    if (parameter==4) {
+    if (parameter==3) {
         [self changeScene:[HighScoreLayer scene]];
     }
-    if (parameter==5) {
+    if (parameter==4) {
         [self changeScene:[GetInvolvedLayer scene]];
     }
 }

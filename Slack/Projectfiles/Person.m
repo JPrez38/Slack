@@ -32,6 +32,7 @@ static Person* sharedPerson;
         sharedPerson=self;
         
         count=0;
+        foot=@"rightfoot";
         [self legs];
     
         upperbody = [CCSprite spriteWithFile:@"upperBod9.png"];
@@ -51,23 +52,35 @@ static Person* sharedPerson;
 - (void) legs {
     NSString* personAnimName = @"lowerBod";
     NSLog(@"%@",personAnimName);
-    CCAnimation* anim = [CCAnimation animationWithFile:personAnimName frameCount:16 delay:0.14f];
+    CCAnimation* rightanim = [CCAnimation animationWithFile:personAnimName frameCount:16 delay:0.14f];
+    CCAnimation* leftanim = [CCAnimation animationWithFile:personAnimName frameCount:8 delay:0.14f];
     
-    [[CCAnimationCache sharedAnimationCache] addAnimation:anim name:personAnimName];
-    myAction= [CCAnimate actionWithAnimation:anim];
+    [[CCAnimationCache sharedAnimationCache] addAnimation:rightanim name:@"rightfoot"];
+    //[[CCAnimationCache sharedAnimationCache] addAnimation:leftanim name:@"leftfoot"];
+    myAction= [CCAnimate actionWithAnimation:rightanim];
     
    
 }
 
+- (void) scheduleFalling:(NSString *) side {
+    
+}
+
 - (void) walk {
     
-    CCAnimation* anim = [[CCAnimationCache sharedAnimationCache] animationByName:@"lowerBod"];
+    CCAnimation* anim = [[CCAnimationCache sharedAnimationCache] animationByName:foot];
     if ([myAction isDone] || count < 1){
         myAction= [CCAnimate actionWithAnimation:anim];
         [self runAction:myAction];
         count++;
         //performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0
         [[PlayLayer sharedPlayLayer] incrementScore];
+        /*if ([foot isEqual:@"rightfoot"]) {
+            foot=@"leftfoot";
+        }
+        if ([foot isEqualToString:@"leftfoot"]){
+            foot=@"rightfoot";
+        }*/
     }
 }
 

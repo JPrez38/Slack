@@ -83,12 +83,12 @@ static PlayLayer* sharedPlayLayer;
         //leftMovingBar.opacity=0;
         [self addChild:leftMovingBar z:0 tag:1];
         float imageHeight2 = leftMovingBar.texture.contentSize.height;
-        leftMovingBar.position = CGPointMake(screenSize.width / 2+40, imageHeight2 / 2);
+        leftMovingBar.position = CGPointMake(screenSize.width / 2+55, imageHeight2 / 2);
         
         rightMovingBar = [CCSprite spriteWithFile:@"line2.png"];
         //rightMovingBar.opacity=0;
         [self addChild:rightMovingBar z:0 tag:1];
-        rightMovingBar.position = CGPointMake(screenSize.width / 2-40, imageHeight2 / 2);
+        rightMovingBar.position = CGPointMake(screenSize.width / 2-55, imageHeight2 / 2);
          
 		
 		// schedules the –(void) update:(ccTime)delta method to be called every frame
@@ -270,7 +270,9 @@ static PlayLayer* sharedPlayLayer;
     CGSize screenSize = [CCDirector sharedDirector].winSize;
     CGPoint middle = CGPointMake(screenSize.width / 2, 0);
     float actualDistance = ccpDistance(player.position, middle);
-    if (fabsf(actualDistance)>=60 || ([state isEqualToString:@"walking"] && fabsf(actualDistance >= 40))){
+    float stoppedBand = ccpDistance(middle, leftStoppedBar.position);
+    float movingBand = ccpDistance(middle, leftMovingBar.position);
+    if (fabsf(actualDistance)>=stoppedBand || ([state isEqualToString:@"walking"] && fabsf(actualDistance >= movingBand))){
         gameOver=true;
     //if (fabsf(actualDistance)>=60){
         [self gameOver];
@@ -283,7 +285,7 @@ static PlayLayer* sharedPlayLayer;
     label.position = CGPointMake(size.width / 2, size.height / 2);
     [self addChild:label];
     [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
-    [[HighScoreLayer sharedHighScoreLayer] submitNameToHighScore:@"TEAM G" withScore:[NSNumber numberWithInt:score*3]];
+    [[HighScoreLayer sharedHighScoreLayer] submitNameToHighScore:@"TEAM G" withScore:[NSNumber numberWithInt:score]];
 }
 
 #if KK_PLATFORM_IOS

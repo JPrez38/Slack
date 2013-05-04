@@ -11,6 +11,8 @@
 
 @interface MainMenuLayer : CCLayer {
     CCSprite* background;
+    CCSprite* personTop;
+    CCSprite* personBottom;
 }
 
 + (id) scene;

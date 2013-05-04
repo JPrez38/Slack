@@ -15,6 +15,7 @@
     int count;
     CCAction* myAction;
     CGSize screenSize;
+    NSString* foot;
     
 }
 
@@ -23,5 +24,6 @@
 +(Person*) sharedPerson;
 - (void) walk;
 - (void) moveArms:(NSNumber*) position;
+- (void) scheduleFalling:(NSString *) side;
 
 @end
