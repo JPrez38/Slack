@@ -139,6 +139,7 @@ static PlayLayer* sharedPlayLayer;
         // assigning the modified position back
         pos.x += [self sway];
         player.position = pos;
+        [self adjustArms];
         [self checkForFall:@"standing"];
         KKTouch* touch;
         CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
@@ -155,6 +156,19 @@ static PlayLayer* sharedPlayLayer;
     else {
         //[[Person sharedPerson] stop];
     }
+}
+
+- (void) adjustArms {
+    //CGSize screenSize = [CCDirector sharedDirector].winSize;
+    //CGPoint middle = CGPointMake(screenSize.width / 2, 0);
+    //float actualDistance = ccpDistance(player.position, middle);
+    float band = ccpDistance(leftStoppedBar.position, rightStoppedBar.position);
+    float range = band/17.0;
+    float currentLocation = ccpDistance(player.position, leftStoppedBar.position);
+    int pictureNumber = (int)(currentLocation/range);
+    [[Person sharedPerson] moveArms:[NSNumber numberWithInt:pictureNumber]];
+    
+    
 }
 
 - (float) sway {
@@ -269,7 +283,7 @@ static PlayLayer* sharedPlayLayer;
     label.position = CGPointMake(size.width / 2, size.height / 2);
     [self addChild:label];
     [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
-    [[HighScoreLayer sharedHighScoreLayer] submitNameToHighScore:@"GAYYY" withScore:[NSNumber numberWithInt:score]];
+    [[HighScoreLayer sharedHighScoreLayer] submitNameToHighScore:@"TEAM G" withScore:[NSNumber numberWithInt:score*3]];
 }
 
 #if KK_PLATFORM_IOS

@@ -34,12 +34,15 @@ static Person* sharedPerson;
         count=0;
         [self legs];
     
-        upperbody = [CCSprite spriteWithFile:@"upperBod0.png"];
+        upperbody = [CCSprite spriteWithFile:@"upperBod9.png"];
         upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
         [self addChild:upperbody z:1 tag:1];
         
+        //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:10] afterDelay:3.0f];
+        //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:14] afterDelay:4.0f];
+        //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:4] afterDelay:7.0f];
+        //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:8] afterDelay:8.0f];
         
-        [self performSelector:@selector(moveArms) withObject:nil afterDelay:5.0f];
         [self scheduleUpdate];
     }
     return self;
@@ -68,9 +71,10 @@ static Person* sharedPerson;
     }
 }
 
-- (void) moveArms {
+- (void) moveArms:(NSNumber*) position {
     [self removeChild:upperbody];
-    upperbody = [CCSprite spriteWithFile:@"upperBod9.png"];
+    NSString *image = [NSString stringWithFormat:@"upperBod%@.png", position];
+    upperbody = [CCSprite spriteWithFile:image];
     upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
     [self addChild:upperbody];
 }

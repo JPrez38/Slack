@@ -22,5 +22,6 @@
 + (id) person;
 +(Person*) sharedPerson;
 - (void) walk;
+- (void) moveArms:(NSNumber*) position;
 
 @end
