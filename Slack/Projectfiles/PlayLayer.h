@@ -20,8 +20,10 @@
     CCSprite* lowerbody;
     CCSprite* upperbody;
     Person* person;
+    NSMutableArray* trees;
     CCSprite* tree1;
     CCSprite* tree2;
+    CCSprite* tree3;
     CGPoint playerVelocity;
     CCSprite* background;
     int score;

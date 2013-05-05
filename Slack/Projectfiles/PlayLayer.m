@@ -28,11 +28,11 @@ static PlayLayer* sharedPlayLayer;
     {
         sharedPlayLayer=self;
         NSLog(@"PlayLayer Screen Called");
-        #if KK_PLATFORM_IOS
-            //self.isAccelerometerEnabled = YES;
-            _accelerometerEnabled=YES;
-            _touchEnabled = YES;
-        #endif
+#if KK_PLATFORM_IOS
+        //self.isAccelerometerEnabled = YES;
+        _accelerometerEnabled=YES;
+        _touchEnabled = YES;
+#endif
         
         time=0;
         
@@ -57,13 +57,27 @@ static PlayLayer* sharedPlayLayer;
 		[self addChild:person z:10];
         
         tree1 = [CCSprite spriteWithFile:@"tree01.png"];
-        [self addChild:tree1 z:0 tag:0];
-        tree1.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
-        
         tree2 = [CCSprite spriteWithFile:@"tree02.png"];
-        [self addChild:tree2 z:0 tag:0];
-        tree2.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        tree3 = [CCSprite spriteWithFile:@"tree03.png"];
         
+        trees = [[NSMutableArray alloc] init];
+        [trees addObject:tree1];
+        [trees addObject:tree2];
+        [trees addObject:tree3];
+        
+        [self addChild:trees[0] z:0 tag:0];
+        //        tree1.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        
+        [self addChild:trees[1] z:0 tag:0];
+        //        tree2.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        
+        [self addChild:trees[2] z:0 tag:0];
+        //        tree3.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        
+        for (CCSprite* aTree in trees) {
+            NSLog(@"x: %f, y: %f", aTree.position.x, aTree.position.y);
+            aTree.position = CGPointMake(screenSize.width * 0.5, screenSize.height * 0.5);
+        }
         
         player = [CCSprite spriteWithFile:@"ball.png"];
         //player.opacity=0;
@@ -92,7 +106,7 @@ static PlayLayer* sharedPlayLayer;
         //rightMovingBar.opacity=0;
         [self addChild:rightMovingBar z:0 tag:1];
         rightMovingBar.position = CGPointMake(screenSize.width / 2-55, imageHeight2 / 2);
-         
+        
 		
 		// schedules the –(void) update:(ccTime)delta method to be called every frame
 		[self scheduleUpdate];
@@ -117,6 +131,7 @@ static PlayLayer* sharedPlayLayer;
 -(void) update:(ccTime)delta
 {
     if (gameOver == false){
+        
         // Keep adding up the playerVelocity to the player's position
         CGPoint pos = player.position;
         pos.x += playerVelocity.x;
@@ -150,8 +165,9 @@ static PlayLayer* sharedPlayLayer;
             if ([background containsPoint:touch.location]) {
                 [self checkForFall:@"walking"];
                 [self takeStep];
+                [self updateTrees];
             }
-        
+            
         }
         
         [scoreLabel setString:[NSString stringWithFormat:@"%i", score]];
@@ -180,28 +196,28 @@ static PlayLayer* sharedPlayLayer;
     //float sensitivity=.9f;
     //float prob=.1;
     /*
-    int rand = arc4random()%10;
-    //int direction=arc4random()%2;
-    ///NSLog(@"%d", direction);
-    if (prob*10 >=rand || (swaying)){
-        if (!swaying) {
-            swaying=true;
-        }
-        if (player.position.x < screenSize.width/2) {
-            adj= sensitivity;
-        }
-        else if (player.position.x > screenSize.width/2){
-            adj = -sensitivity;
-        }
-        else {
-            adj=0;
-        }
-        frameCount+=1;
-        if (frameCount >=30 && swaying) {
-            swaying=false;
-            frameCount=0;
-        }
-    }*/
+     int rand = arc4random()%10;
+     //int direction=arc4random()%2;
+     ///NSLog(@"%d", direction);
+     if (prob*10 >=rand || (swaying)){
+     if (!swaying) {
+     swaying=true;
+     }
+     if (player.position.x < screenSize.width/2) {
+     adj= sensitivity;
+     }
+     else if (player.position.x > screenSize.width/2){
+     adj = -sensitivity;
+     }
+     else {
+     adj=0;
+     }
+     frameCount+=1;
+     if (frameCount >=30 && swaying) {
+     swaying=false;
+     frameCount=0;
+     }
+     }*/
     adj += [self wind];
     return adj;
 }
@@ -254,6 +270,23 @@ static PlayLayer* sharedPlayLayer;
     [[Person sharedPerson] walk];
 }
 
+- (void) updateTrees
+{
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    int positionDelta = 5;
+    
+    for (CCSprite* aTree in trees) {
+        NSLog(@"x: %f, y: %f", aTree.position.x, aTree.position.y);
+        
+        float newHeightPosition = aTree.position.y - positionDelta;
+        if (newHeightPosition < -0.5 * screenSize.height) {
+            newHeightPosition = 1.5 * screenSize.height;
+        }
+        
+        aTree.position = CGPointMake(aTree.position.x, newHeightPosition);
+    }
+}
+
 - (void) incrementScore {
     score++;
     [self performSelector:@selector(increment) withObject:nil afterDelay:1.2f];
@@ -277,7 +310,7 @@ static PlayLayer* sharedPlayLayer;
     float movingBand = ccpDistance(middle, leftMovingBar.position);
     if (fabsf(actualDistance)>=stoppedBand || ([state isEqualToString:@"walking"] && fabsf(actualDistance >= movingBand))){
         gameOver=true;
-    //if (fabsf(actualDistance)>=60){
+        //if (fabsf(actualDistance)>=60){
         [self gameOver];
     }
 }
