@@ -17,7 +17,13 @@ static HighScoreLayer* sharedHighScoreLayer;
 {
 	if (sharedHighScoreLayer ==nil)
         [self scene];
+    
+    //NSAssert(sharedHighScoreLayer != nil, @"GameScene instance not yet initialized!");
 	return sharedHighScoreLayer;
+}
+
++ (id) highScoreLayer {
+    return [[self alloc] init];
 }
 
 - (id) init {

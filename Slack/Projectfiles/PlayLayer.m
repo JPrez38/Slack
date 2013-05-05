@@ -40,6 +40,7 @@ static PlayLayer* sharedPlayLayer;
         gameOver=false;
         swaying=false;
 		
+        
 		background = [CCSprite spriteWithFile:@"grass_bkgrd1.png"];
 		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         //background.opacity=156;
@@ -48,6 +49,8 @@ static PlayLayer* sharedPlayLayer;
         slackline = [CCSprite spriteWithFile:@"slackline1.png"];
         [self addChild:slackline z:0 tag:1];
         slackline.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        
+        //HighScoreLayer *highscores = [HighScoreLayer highScoreLayer];
         
         person = [Person person];
 		person.position = CGPointMake(screenSize.width/2, screenSize.height / 2);

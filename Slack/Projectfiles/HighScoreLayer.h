@@ -19,5 +19,7 @@
 
 + (id) scene;
 + (HighScoreLayer*) sharedHighScoreLayer;
++ (id) highScoreLayer;
+
 
 @end
