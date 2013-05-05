@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Slack/Projectfiles/PlayLayer.m"
-         timestampString = "389307153.814897"
+         timestampString = "389461953.137949"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Slack/Projectfiles/Person.m"
-         timestampString = "389408822.629181"
+         timestampString = "389409584.131684"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "100"
-         endingLineNumber = "100"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
          landmarkName = "-walk"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Slack/Projectfiles/Person.m"
-         timestampString = "389408822.629181"
+         timestampString = "389409584.131684"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
+         startingLineNumber = "114"
+         endingLineNumber = "114"
          landmarkName = "-moveArms:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Slack/Projectfiles/Person.m"
-         timestampString = "389408822.629181"
+         timestampString = "389409584.131684"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "61"
-         endingLineNumber = "61"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "-initWithPersonImage"
          landmarkType = "5">
       </FileBreakpoint>

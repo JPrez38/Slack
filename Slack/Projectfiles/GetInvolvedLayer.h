@@ -11,6 +11,9 @@
 
 @interface GetInvolvedLayer : CCLayer {
     
+    CCSprite* background;
+    CCSprite* personBottom;
+    CCSprite* personTop;
 }
 
 + (id) scene;
