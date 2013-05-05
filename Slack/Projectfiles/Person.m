@@ -41,8 +41,8 @@ static Person* sharedPerson;
         
         NSString* fallingLeft = @"falling_02_";
         NSString* fallingRight = @"falling_01_";
-        CCAnimation* rightFallanim = [CCAnimation animationWithFile:fallingRight frameCount:18 delay:0.08f];
-        CCAnimation* leftFallanim = [CCAnimation animationWithFile:fallingLeft frameCount:18 delay:0.08f];
+        CCAnimation* rightFallanim = [CCAnimation animationWithFile:fallingRight frameCount:18 delay:0.07f];
+        CCAnimation* leftFallanim = [CCAnimation animationWithFile:fallingLeft frameCount:18 delay:0.07f];
         
         [[CCAnimationCache sharedAnimationCache] addAnimation:rightFallanim name:@"rightFall"];
         [[CCAnimationCache sharedAnimationCache] addAnimation:leftFallanim name:@"leftFall"];
@@ -63,8 +63,8 @@ static Person* sharedPerson;
 - (void) legs {
     NSString* rightStep = @"rightStep";
     NSString* leftStep = @"leftStep";
-    CCAnimation* rightStepAnim = [CCAnimation animationWithFile:rightStep frameCount:8 delay:0.1f];
-    CCAnimation* leftStepAnim = [CCAnimation animationWithFile:leftStep frameCount:8 delay:0.1f];
+    CCAnimation* rightStepAnim = [CCAnimation animationWithFile:rightStep frameCount:8 delay:0.08f];
+    CCAnimation* leftStepAnim = [CCAnimation animationWithFile:leftStep frameCount:8 delay:0.08f];
     
     [[CCAnimationCache sharedAnimationCache] addAnimation:rightStepAnim name:@"rightfoot"];
     [[CCAnimationCache sharedAnimationCache] addAnimation:leftStepAnim name:@"leftfoot"];

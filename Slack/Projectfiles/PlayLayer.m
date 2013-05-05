@@ -13,6 +13,7 @@
 #import "HighScoreLayer.h"
 
 
+
 @implementation PlayLayer
 
 static PlayLayer* sharedPlayLayer;
@@ -33,7 +34,7 @@ static PlayLayer* sharedPlayLayer;
         _touchEnabled = YES;
 #endif
         
-        time=0;
+        balBar=-10;
         
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
         gameOver=false;
@@ -80,30 +81,30 @@ static PlayLayer* sharedPlayLayer;
         
         player = [CCSprite spriteWithFile:@"ball.png"];
         //player.opacity=0;
-        [self addChild:player z:0 tag:1];
+        [self addChild:player z:balBar tag:1];
         float imageHeight = player.texture.contentSize.height;
         player.position = CGPointMake(screenSize.width / 2, imageHeight / 2);
         
         leftStoppedBar = [CCSprite spriteWithFile:@"line.png"];
         //leftStoppedBar.opacity=0;
-        [self addChild:leftStoppedBar z:0 tag:1];
+        [self addChild:leftStoppedBar z:balBar tag:1];
         float imageHeight1 = leftStoppedBar.texture.contentSize.height;
         leftStoppedBar.position = CGPointMake(screenSize.width / 2-60, imageHeight1 / 2);
         
         rightStoppedBar = [CCSprite spriteWithFile:@"line.png"];
         //rightStoppedBar.opacity=0;
-        [self addChild:rightStoppedBar z:0 tag:1];
+        [self addChild:rightStoppedBar z:balBar tag:1];
         rightStoppedBar.position = CGPointMake(screenSize.width / 2+60, imageHeight1 / 2);
         
         leftMovingBar = [CCSprite spriteWithFile:@"line2.png"];
         //leftMovingBar.opacity=0;
-        [self addChild:leftMovingBar z:0 tag:1];
+        [self addChild:leftMovingBar z:balBar tag:1];
         float imageHeight2 = leftMovingBar.texture.contentSize.height;
         leftMovingBar.position = CGPointMake(screenSize.width / 2+55, imageHeight2 / 2);
         
         rightMovingBar = [CCSprite spriteWithFile:@"line2.png"];
         //rightMovingBar.opacity=0;
-        [self addChild:rightMovingBar z:0 tag:1];
+        [self addChild:rightMovingBar z:balBar tag:1];
         rightMovingBar.position = CGPointMake(screenSize.width / 2-55, imageHeight2 / 2);
         
 		

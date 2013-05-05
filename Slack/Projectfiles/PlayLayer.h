@@ -33,8 +33,8 @@
     Boolean blowing;
     int frameCount;
     NSString *direction;
-    int time;
     int count;
+    int balBar;
     
     
 }
