@@ -30,33 +30,49 @@ static HighScoreLayer* sharedHighScoreLayer;
     
     if ((self = [super init]))
     {
+        //background images
+        CGSize screenSize = [[CCDirector sharedDirector] winSize];
+		background = [CCSprite spriteWithFile:@"plainBackGround.png"];
+		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+        [self addChild:background z:-1];
+        
+        personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
+        personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+        personBottom.opacity = 50;
+        [self addChild:personBottom z:0 tag:1];
+        
+        personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
+        personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+        personTop.opacity = 50;
+        [self addChild:personTop z:0 tag:1];
+        
+        CCLabelTTF* labelTop = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:64];
+		CGSize sizeTop = [CCDirector sharedDirector].winSize;
+		labelTop.position = CGPointMake(sizeTop.width / 2, sizeTop.height*.9);
+        labelTop.color = ccc3(0,0,0);
+		[self addChild:labelTop];
+        [self setUpMenus];
+        
+        
         sharedHighScoreLayer=self;
         // Global Variables
         maxScoresDisplayed = 6;
         
-        // High Score Label
-        CCLabelTTF* label = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:32];
-		CGSize size = [CCDirector sharedDirector].winSize;
-		label.position = CGPointMake(size.width * 0.5, size.height * 0.9);
-		[self addChild:label];
-        
         // Get data from plist
         NSMutableArray *scores = [self readStoredScores];
         /*
-        [self submitNameToHighScore:@"Abe Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-        [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-        [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-        [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-        [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-        [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+         [self submitNameToHighScore:@"Abe Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+         [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+         [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+         [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+         [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+         [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
+         [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
          */
         
         scores = [self readStoredScores];
         NSLog(@"Displayed Scores: %@", scores);
         [self displayScores:scores];
-        
-        [self setReturnToMainButton];
     }
     return self;
 }
@@ -66,35 +82,6 @@ static HighScoreLayer* sharedHighScoreLayer;
     CCLayer* layer = [HighScoreLayer node];
     [scene addChild:layer];
     return scene;
-}
-
--(void) setReturnToMainButton
-{
-    
-	// Create some menu items
-    //    SEL setMainMenuSelector = sel_registerName("setReturnToMainAction:");
-	CCMenuItemImage * returnMenuItem = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png" selectedImage: @"SlacklineMenu2.png" target:self selector:@selector(returnToMainAction:)];
-    
-    returnMenuItem.tag=1;
-    CGSize size = [CCDirector sharedDirector].winSize;
-    //returnMenuItem.position = CGPointMake(size.width * .5, size.height *.2);
-    CCMenu *myMenu = [CCMenu menuWithItems:returnMenuItem, nil];
-    myMenu.position = CGPointMake(size.width * .5, size.height *.2);
-    
-    
-	// add the menu to your scene
-	[self addChild:myMenu];
-}
-
-- (void) setMainMenuSelector: (CCMenuItem  *) menuItem
-{
-	[[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
-}
-
-- (void) returnToMainAction: (CCMenuItem  *) menuItem
-{
-    NSLog(@"Return to Main Menu pressed");
-	[[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
 }
 
 - (NSMutableArray*) readStoredScores
@@ -202,6 +189,31 @@ static HighScoreLayer* sharedHighScoreLayer;
         CCLabelTTF* scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@", userScore] fontName:@"Marker Felt" fontSize:24];
         scoreLabel.position = CGPointMake(secondColumnPosition, heightPosition);
         [self addChild:scoreLabel];
+    }
+}
+
+-(void) setUpMenus
+{
+	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
+                                                         selectedImage: @"main_menu_icon2.png"
+                                                                target:self
+                                                              selector:@selector(doSomething:)];
+    menuItem1.tag=1;
+    
+	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
+    CGSize size = [CCDirector sharedDirector].winSize;
+    menuItem1.position = ccp(size.width*.5, size.height*.1);
+    myMenu.position = ccp(0,0);
+	[self addChild:myMenu];
+}
+
+- (void) doSomething: (CCMenuItem  *) menuItem
+{
+	int parameter = menuItem.tag;
+    
+    if (parameter==1) {
+        [[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
+        
     }
 }
 
