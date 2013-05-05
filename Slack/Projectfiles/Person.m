@@ -48,7 +48,7 @@ static Person* sharedPerson;
         [[CCAnimationCache sharedAnimationCache] addAnimation:leftFallanim name:@"leftFall"];
         
         
-        //[self performSelector:@selector(scheduleFalling:) withObject:@"right" afterDelay:4.0f];
+        //[self performSelector:@selector(scheduleFalling:) withObject:@"left" afterDelay:4.0f];
         
         //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:10] afterDelay:3.0f];
         //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:14] afterDelay:4.0f];
@@ -73,6 +73,8 @@ static Person* sharedPerson;
 }
 
 - (void) scheduleFalling:(NSString *) side {
+    [self removeChild:upperbody];
+    [self removeChild:lowerbody];
     CCAnimation *anim;
     CCAction *action;
     if ([side isEqualToString:@"right"]) {

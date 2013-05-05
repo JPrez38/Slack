@@ -32,24 +32,26 @@ static HighScoreLayer* sharedHighScoreLayer;
     {
         //background images
         CGSize screenSize = [[CCDirector sharedDirector] winSize];
-		background = [CCSprite spriteWithFile:@"plainBackGround.png"];
+		background = [CCSprite spriteWithFile:@"backgroundStretched.png"];
 		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         [self addChild:background z:-1];
         
-        personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
-        personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
-        personBottom.opacity = 50;
-        [self addChild:personBottom z:0 tag:1];
-        
-        personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
-        personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
-        personTop.opacity = 50;
-        [self addChild:personTop z:0 tag:1];
+        /*
+         personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
+         personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+         personBottom.opacity = 50;
+         [self addChild:personBottom z:0 tag:1];
+         
+         personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
+         personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+         personTop.opacity = 50;
+         [self addChild:personTop z:0 tag:1];
+         */
         
         CCLabelTTF* labelTop = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:64];
 		CGSize sizeTop = [CCDirector sharedDirector].winSize;
 		labelTop.position = CGPointMake(sizeTop.width / 2, sizeTop.height*.9);
-        labelTop.color = ccc3(0,0,0);
+        labelTop.color = ccc3(255,140,0);
 		[self addChild:labelTop];
         [self setUpMenus];
         
@@ -165,10 +167,10 @@ static HighScoreLayer* sharedHighScoreLayer;
 - (void) displayScores: (NSMutableArray*) scores
 {
     CGSize size = [CCDirector sharedDirector].winSize;
-    int baseHeightPosition = size.height * 0.8;
+    int baseHeightPosition = size.height * 0.72;
     int heightSpacing = size.height * 0.1;
     int firstColumnPosition = size.width * 0.3;
-    int secondColumnPosition = size.width * 0.8;
+    int secondColumnPosition = size.width * 0.72;
     
     int numScoresDisplayed = maxScoresDisplayed;
     if (scores.count < maxScoresDisplayed) numScoresDisplayed = scores.count;
@@ -184,10 +186,12 @@ static HighScoreLayer* sharedHighScoreLayer;
         
         CCLabelTTF* nameLabel = [CCLabelTTF labelWithString:userName fontName:@"Marker Felt" fontSize:24];
         nameLabel.position = CGPointMake(firstColumnPosition, heightPosition);
+        nameLabel.color = ccc3(0,100,0);
         [self addChild:nameLabel];
         
         CCLabelTTF* scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@", userScore] fontName:@"Marker Felt" fontSize:24];
         scoreLabel.position = CGPointMake(secondColumnPosition, heightPosition);
+        scoreLabel.color = ccc3(0,100,0);
         [self addChild:scoreLabel];
     }
 }

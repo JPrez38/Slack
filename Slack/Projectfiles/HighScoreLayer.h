@@ -12,8 +12,8 @@
 @interface HighScoreLayer : CCLayer {
     unsigned int maxScoresDisplayed;
     CCSprite *background;
-    CCSprite *personBottom;
-    CCSprite *personTop;
+    //    CCSprite *personBottom;
+    //    CCSprite *personTop;
 }
 
 - (NSMutableArray*) readStoredScores;
