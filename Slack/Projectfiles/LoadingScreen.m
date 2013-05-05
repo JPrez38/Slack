@@ -44,7 +44,7 @@
 		// Two reasons: first, it would crash if not. Second, the Loading label wouldn't be displayed.
 		// In this case delay is set to > 0.0f just so you can actually see the LoadingScene.
 		// If you use the LoadingScene in your own code, be sure to set the delay to 0.0f
-		[self scheduleOnce:@selector(loadScene:) delay:2.0f];
+		[self scheduleOnce:@selector(loadScene:) delay:0.0f];
 	}
 	
 	return self;

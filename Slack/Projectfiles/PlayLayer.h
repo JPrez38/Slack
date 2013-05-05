@@ -36,10 +36,12 @@
     int time;
     int count;
     
+    
 }
 
 + (id) scene;
 - (void) incrementScore;
 + (PlayLayer *) sharedPlayLayer;
+- (Boolean) isGameOver;
 
 @end

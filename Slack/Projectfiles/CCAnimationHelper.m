@@ -19,7 +19,6 @@
 	{
 		// Assuming all animation files are named "nameX.png" with X being a consecutive number starting with 0.
 		NSString* file = [NSString stringWithFormat:@"%@%i.png", name, i];
-        NSLog(@"dsdf%@", file);
 		CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:file];
         
 		// Assuming that image file animations always use the whole image for each animation frame.

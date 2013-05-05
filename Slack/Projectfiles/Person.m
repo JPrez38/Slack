@@ -41,8 +41,8 @@ static Person* sharedPerson;
         
         NSString* fallingLeft = @"falling_02_";
         NSString* fallingRight = @"falling_01_";
-        CCAnimation* rightFallanim = [CCAnimation animationWithFile:fallingRight frameCount:18 delay:0.12f];
-        CCAnimation* leftFallanim = [CCAnimation animationWithFile:fallingLeft frameCount:18 delay:0.12f];
+        CCAnimation* rightFallanim = [CCAnimation animationWithFile:fallingRight frameCount:18 delay:0.1f];
+        CCAnimation* leftFallanim = [CCAnimation animationWithFile:fallingLeft frameCount:18 delay:0.1f];
         
         [[CCAnimationCache sharedAnimationCache] addAnimation:rightFallanim name:@"rightFall"];
         [[CCAnimationCache sharedAnimationCache] addAnimation:leftFallanim name:@"leftFall"];
@@ -61,36 +61,16 @@ static Person* sharedPerson;
 }
 
 - (void) legs {
-    NSString* personAnimName = @"lowerBod";
-    CCAnimation* rightStepAnim = [CCAnimation animationWithFile:personAnimName frameCount:16 delay:0.12f];
-    //CCAnimation* leftStepAnim = [CCAnimation animationWithFile:personAnimName frameCount:8 delay:0.12f];
+    NSString* rightStep = @"rightStep";
+    NSString* leftStep = @"leftStep";
+    CCAnimation* rightStepAnim = [CCAnimation animationWithFile:rightStep frameCount:8 delay:0.1f];
+    CCAnimation* leftStepAnim = [CCAnimation animationWithFile:leftStep frameCount:8 delay:0.1f];
     
     [[CCAnimationCache sharedAnimationCache] addAnimation:rightStepAnim name:@"rightfoot"];
-    //[[CCAnimationCache sharedAnimationCache] addAnimation:leftStepAnim name:@"leftfoot"];
+    [[CCAnimationCache sharedAnimationCache] addAnimation:leftStepAnim name:@"leftfoot"];
     myAction= [CCAnimate actionWithAnimation:rightStepAnim];
     
    
-}
-
-- (void) scheduleFalling:(NSString *) side {
-    [self removeChild:upperbody];
-    [self removeChild:lowerbody];
-    CCAnimation *anim;
-    CCAction *action;
-    if ([side isEqualToString:@"right"]) {
-        anim = [[CCAnimationCache sharedAnimationCache] animationByName:@"rightFall"];
-        action = [CCAnimate actionWithAnimation:anim];
-        [self runAction:action];
-    }
-
-    if ([side isEqualToString:@"left"]){
-         anim = [[CCAnimationCache sharedAnimationCache] animationByName:@"rightFall"];
-         action = [CCAnimate actionWithAnimation:anim];
-         [self runAction:action];
-    }
-    
-    
-    
 }
 
 - (void) walk {
@@ -102,21 +82,45 @@ static Person* sharedPerson;
         count++;
         //performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0
         [[PlayLayer sharedPlayLayer] incrementScore];
-        /*if ([foot isEqual:@"rightfoot"]) {
+        if ([foot isEqualToString:@"rightfoot"]) {
             foot=@"leftfoot";
         }
-        if ([foot isEqualToString:@"leftfoot"]){
+        else {
             foot=@"rightfoot";
-        }*/
+        }
     }
 }
 
+- (void) scheduleFalling:(NSString *) side {
+    CCAnimation *anim;
+    CCAction *action;
+    if ([side isEqualToString:@"right"]) {
+        anim = [[CCAnimationCache sharedAnimationCache] animationByName:@"rightFall"];
+        action = [CCAnimate actionWithAnimation:anim];
+        [self runAction:action];
+    }
+
+    if ([side isEqualToString:@"left"]){
+         anim = [[CCAnimationCache sharedAnimationCache] animationByName:@"leftFall"];
+         action = [CCAnimate actionWithAnimation:anim];
+         [self runAction:action];
+    }
+    
+    
+    
+}
+
+
+
 - (void) moveArms:(NSNumber*) position {
     [self removeChild:upperbody];
+    if (![[PlayLayer sharedPlayLayer] isGameOver]){
+        
     NSString *image = [NSString stringWithFormat:@"upperBod%@.png", position];
     upperbody = [CCSprite spriteWithFile:image];
     upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
     [self addChild:upperbody];
+    }
 }
 
 -(void) update:(ccTime)delta

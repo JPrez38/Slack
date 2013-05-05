@@ -27,7 +27,6 @@ static PlayLayer* sharedPlayLayer;
     if ((self = [super init]))
     {
         sharedPlayLayer=self;
-        NSLog(@"PlayLayer Screen Called");
 #if KK_PLATFORM_IOS
         //self.isAccelerometerEnabled = YES;
         _accelerometerEnabled=YES;
@@ -75,7 +74,7 @@ static PlayLayer* sharedPlayLayer;
         //        tree3.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
         
         for (CCSprite* aTree in trees) {
-            NSLog(@"x: %f, y: %f", aTree.position.x, aTree.position.y);
+            //NSLog(@"x: %f, y: %f", aTree.position.x, aTree.position.y);
             aTree.position = CGPointMake(screenSize.width * 0.5, screenSize.height * 0.5);
         }
         
@@ -173,6 +172,7 @@ static PlayLayer* sharedPlayLayer;
         [scoreLabel setString:[NSString stringWithFormat:@"%i", score]];
     }
     else {
+        [self adjustArms];
         //[[Person sharedPerson] stop];
     }
 }
@@ -182,7 +182,7 @@ static PlayLayer* sharedPlayLayer;
     //CGPoint middle = CGPointMake(screenSize.width / 2, 0);
     //float actualDistance = ccpDistance(player.position, middle);
     float band = ccpDistance(leftStoppedBar.position, rightStoppedBar.position);
-    float range = band/17.0;
+    float range = band/16.0;
     float currentLocation = ccpDistance(player.position, leftStoppedBar.position);
     int pictureNumber = (int)(currentLocation/range);
     [[Person sharedPerson] moveArms:[NSNumber numberWithInt:pictureNumber]];
@@ -198,7 +198,6 @@ static PlayLayer* sharedPlayLayer;
     /*
      int rand = arc4random()%10;
      //int direction=arc4random()%2;
-     ///NSLog(@"%d", direction);
      if (prob*10 >=rand || (swaying)){
      if (!swaying) {
      swaying=true;
@@ -228,20 +227,16 @@ static PlayLayer* sharedPlayLayer;
     float prob=.003;
     
     int rand = arc4random()%1000;
-    //NSLog(@"%d",rand);
     if (blowing==true){
         
     }
     
     
     if (prob*1000 >=rand || (blowing)){
-        //NSLog(@"hey");
         if (!blowing) {
             blowing=true;
-            //NSLog(@"yo");
         }
         int randdir=arc4random()%2;
-        //NSLog(@"%d", randdir);
         if ((randdir >= 1 && [direction isEqual:@"none"]) || [direction isEqual:@"right"]){
             windadj=sensitivity;
             direction=@"right";
@@ -276,7 +271,7 @@ static PlayLayer* sharedPlayLayer;
     int positionDelta = 5;
     
     for (CCSprite* aTree in trees) {
-        NSLog(@"x: %f, y: %f", aTree.position.x, aTree.position.y);
+        //NSLog(@"x: %f, y: %f", aTree.position.x, aTree.position.y);
         
         float newHeightPosition = aTree.position.y - positionDelta;
         if (newHeightPosition < -0.5 * screenSize.height) {
@@ -288,12 +283,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) incrementScore {
-    score++;
-    [self performSelector:@selector(increment) withObject:nil afterDelay:1.2f];
-}
-
-- (void) increment {
-    score++;
+    score+=10;
 }
 
 - (float) slip {
@@ -315,10 +305,20 @@ static PlayLayer* sharedPlayLayer;
     }
 }
 
+- (Boolean) isGameOver {
+    return gameOver;
+}
+
 - (void) gameOver {
-    [[Person sharedPerson] scheduleFalling:@"right"];
+     CGSize size = [CCDirector sharedDirector].winSize;
+    if (player.position.x-size.width/2 > 0) {
+        [[Person sharedPerson] scheduleFalling:@"right"];
+    }
+    else {
+        [[Person sharedPerson] scheduleFalling:@"left"];
+    }
     CCLabelTTF* label = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Marker Felt" fontSize:64];
-    CGSize size = [CCDirector sharedDirector].winSize;
+   
     label.position = CGPointMake(size.width / 2, size.height / 2);
     [self addChild:label];
     [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
