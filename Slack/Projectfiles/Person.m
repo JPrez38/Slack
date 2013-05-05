@@ -41,8 +41,8 @@ static Person* sharedPerson;
         
         NSString* fallingLeft = @"falling_02_";
         NSString* fallingRight = @"falling_01_";
-        CCAnimation* rightFallanim = [CCAnimation animationWithFile:fallingRight frameCount:18 delay:0.1f];
-        CCAnimation* leftFallanim = [CCAnimation animationWithFile:fallingLeft frameCount:18 delay:0.1f];
+        CCAnimation* rightFallanim = [CCAnimation animationWithFile:fallingRight frameCount:18 delay:0.08f];
+        CCAnimation* leftFallanim = [CCAnimation animationWithFile:fallingLeft frameCount:18 delay:0.08f];
         
         [[CCAnimationCache sharedAnimationCache] addAnimation:rightFallanim name:@"rightFall"];
         [[CCAnimationCache sharedAnimationCache] addAnimation:leftFallanim name:@"leftFall"];
@@ -75,8 +75,12 @@ static Person* sharedPerson;
 
 - (void) walk {
     
+    if ([[PlayLayer sharedPlayLayer] isGameOver]) {
+        [self stopAction:myAction];
+    }
+    
     CCAnimation* anim = [[CCAnimationCache sharedAnimationCache] animationByName:foot];
-    if ([myAction isDone] || count < 1){
+    if (([myAction isDone] || count < 1) && (![[PlayLayer sharedPlayLayer] isGameOver])){
         myAction= [CCAnimate actionWithAnimation:anim];
         [self runAction:myAction];
         count++;
@@ -116,10 +120,10 @@ static Person* sharedPerson;
     [self removeChild:upperbody];
     if (![[PlayLayer sharedPlayLayer] isGameOver]){
         
-    NSString *image = [NSString stringWithFormat:@"upperBod%@.png", position];
-    upperbody = [CCSprite spriteWithFile:image];
-    upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
-    [self addChild:upperbody];
+        NSString *image = [NSString stringWithFormat:@"upperBod%@.png", position];
+        upperbody = [CCSprite spriteWithFile:image];
+        upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+        [self addChild:upperbody];
     }
 }
 

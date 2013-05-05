@@ -161,7 +161,7 @@ static PlayLayer* sharedPlayLayer;
         KKTouch* touch;
         CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
         {
-            if ([background containsPoint:touch.location]) {
+            if ([background containsPoint:touch.location] && (!gameOver)) {
                 [self checkForFall:@"walking"];
                 [self takeStep];
                 [self updateTrees];
@@ -182,9 +182,13 @@ static PlayLayer* sharedPlayLayer;
     //CGPoint middle = CGPointMake(screenSize.width / 2, 0);
     //float actualDistance = ccpDistance(player.position, middle);
     float band = ccpDistance(leftStoppedBar.position, rightStoppedBar.position);
-    float range = band/16.0;
+    float range = band/17.0;
     float currentLocation = ccpDistance(player.position, leftStoppedBar.position);
     int pictureNumber = (int)(currentLocation/range);
+    if(pictureNumber > 16){
+        pictureNumber=16;
+    }
+    
     [[Person sharedPerson] moveArms:[NSNumber numberWithInt:pictureNumber]];
     
     
