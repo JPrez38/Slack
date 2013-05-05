@@ -58,8 +58,8 @@
      target:self
      selector:@selector(doSomething:)];
      */
-	CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"main_menu_SETTINGS_01.png"
-                                                         selectedImage: @"main_menu_SETTINGS_02.png"
+	CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"main_menu_SETTINGS_01_BlackedOut.png"
+                                                         selectedImage: @"main_menu_SETTINGS_02_BlackedOut.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
     
@@ -108,7 +108,7 @@
     //     [self changeScene:[AchievementModeLayer scene]];
     // }
     if (parameter==2) {
-        [self changeScene:[HowToLayer scene]];
+        // [self changeScene:[HowToLayer scene]];
     }
     if (parameter==3) {
         [self changeScene:[HighScoreLayer scene]];

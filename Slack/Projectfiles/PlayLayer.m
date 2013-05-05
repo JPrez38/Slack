@@ -316,7 +316,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) gameOver {
-    //[[Person sharedPerson] scheduleFalling:@"right"];
+    [[Person sharedPerson] scheduleFalling:@"right"];
     CCLabelTTF* label = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Marker Felt" fontSize:64];
     CGSize size = [CCDirector sharedDirector].winSize;
     label.position = CGPointMake(size.width / 2, size.height / 2);
