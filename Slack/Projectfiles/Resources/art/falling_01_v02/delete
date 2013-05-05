@@ -1,0 +1,12 @@
+#!/bin/bash
+for i in `seq 0 9`;
+do
+  echo $i
+  rm falling_01_0000$i.png
+done
+
+for i in `seq 10 17`;
+do
+  echo $i
+  rm falling_01_000$i.png
+done

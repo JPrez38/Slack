@@ -1,0 +1,12 @@
+#!/bin/bash
+for i in `seq 0 9`;
+do
+  echo $i
+  git rm "upperBod (0.00.00.0$i).png"
+done
+
+for i in `seq 10 17`;
+do
+  echo $i
+  git rm "upperBod (0.00.00.$i).png"
+done
