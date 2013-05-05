@@ -35,8 +35,8 @@
 {
     
 	// Create some menu items
-	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-                                                         selectedImage: @"SlacklineMenu2.png"
+	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon"
+                                                         selectedImage: @"main_menu_icon2"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
     menuItem1.tag=1;
