@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Slack/highscore.plist">
-   </FileRef>
-   <FileRef
       location = "group:Slack/Slack.xcodeproj">
    </FileRef>
    <FileRef
