@@ -9,6 +9,7 @@
 #import "Person.h"
 #import "CCAnimationHelper.h"
 #import "PlayLayer.h"
+#import "LoadingScreen.h"
 
 
 @implementation Person
@@ -130,6 +131,59 @@ static Person* sharedPerson;
 -(void) update:(ccTime)delta
 {
     
+}
+
+-(void) changeScene: (id) layer
+{
+	//BOOL useLoadingScene = YES;
+    [[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
+    /*
+     if (useLoadingScene)
+     {
+     [[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
+     }
+     else
+     {
+     [[CCDirector sharedDirector] replaceScene:layer];
+     }
+     */
+}
+
+-(void) onEnter
+{
+	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	// must call super here:
+	[super onEnter];
+}
+
+-(void) onEnterTransitionDidFinish
+{
+	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	// must call super here:
+	[super onEnterTransitionDidFinish];
+}
+
+-(void) onExit
+{
+	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	// must call super here:
+	[super onExit];
+}
+
+-(void) onExitTransitionDidStart
+{
+	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	// must call super here:
+	[super onExitTransitionDidStart];
+}
+
+-(void) dealloc
+{
+    CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
 }
 
 @end

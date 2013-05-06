@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+typedef enum
+{
+    TargetSceneINVALID = 0,
+    TargetSceneFirst,
+    TargetSceneSecond,
+    TargetSceneMAX,
+} TargetSceneTypes;
+
 @interface LoadingScreen : CCScene
 {
     id targetScene;

@@ -120,7 +120,9 @@
 
 -(void) changeScene: (id) layer
 {
-	BOOL useLoadingScene = YES;
+	//BOOL useLoadingScene = YES;
+    [[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
+    /*
 	if (useLoadingScene)
 	{
 		[[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
@@ -129,6 +131,7 @@
 	{
 		[[CCDirector sharedDirector] replaceScene:layer];
 	}
+     */
 }
 
 -(void) onEnter
