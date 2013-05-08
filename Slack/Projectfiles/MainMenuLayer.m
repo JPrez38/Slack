@@ -8,7 +8,6 @@
 
 #import "MainMenuLayer.h"
 #import "PlayLayer.h"
-#import "AchievementModeLayer.h"
 #import "HowToLayer.h"
 #import "HighScoreLayer.h"
 #import "GetInvolvedLayer.h"
@@ -27,22 +26,29 @@
     
     if ((self = [super init]))
     {
-        CGSize screenSize = [[CCDirector sharedDirector] winSize];
-		background = [CCSprite spriteWithFile:@"main_menu_bkgd1.png"];
-		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
-        //background.opacity=156;
-		[self addChild:background z:-1];
+        screenSize = [[CCDirector sharedDirector] winSize];
+        [self setUpBackground];
         [self setUpMenus];
         
-        personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
-        [self addChild:personBottom z:0 tag:1];
-        personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
-        
-        personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
-        [self addChild:personTop z:0 tag:1];
-        personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+       
     }
     return self;
+}
+
+- (void) setUpBackground {
+    
+    background = [CCSprite spriteWithFile:@"main_menu_bkgd1.png"];
+    background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+    [self addChild:background z:-1];
+    
+    personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
+    [self addChild:personBottom z:0 tag:1];
+    personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+    
+    personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
+    [self addChild:personTop z:0 tag:1];
+    personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+    
 }
 
 -(void) setUpMenus
@@ -52,12 +58,7 @@
                                                          selectedImage: @"main_menu_SLACK_02.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
-    /*
-     CCMenuItemImage * menuItem5 = [CCMenuItemImage itemWithNormalImage:@"SlacklineMenu2.png"
-     selectedImage: @"SlacklineMenu2.png"
-     target:self
-     selector:@selector(doSomething:)];
-     */
+   
 	CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"main_menu_SETTINGS_01_BlackedOut.png"
                                                          selectedImage: @"main_menu_SETTINGS_02_BlackedOut.png"
                                                                 target:self
@@ -72,24 +73,19 @@
                                                          selectedImage: @"main_menu_GETINVOLVED_02.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
+    
     menuItem1.tag=1;    //slack
-    //menuItem5.tag=5;
     menuItem2.tag=2;    //how to
     menuItem3.tag=3;    //high scores
     menuItem4.tag=4;    //get involved
     
-    
 	// Create a menu and add your menu items to it
 	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, menuItem3, menuItem4, nil];
     
-    CGSize size = [CCDirector sharedDirector].winSize;
-    NSLog(@"HEIGHT: %f", size.height);
-    NSLog(@"WIDTH: %f", size.width);
-    
-    menuItem1.position = ccp(size.width*.5, size.height*.45);
-    menuItem2.position = ccp(size.width*.25, size.height*.25);
-    menuItem3.position = ccp(size.width*.75, size.height*.25);
-    menuItem4.position = ccp(size.width*.5, size.height*.09);
+    menuItem1.position = ccp(screenSize.width*.5, screenSize.height*.45);
+    menuItem2.position = ccp(screenSize.width*.25, screenSize.height*.25);
+    menuItem3.position = ccp(screenSize.width*.75, screenSize.height*.25);
+    menuItem4.position = ccp(screenSize.width*.5, screenSize.height*.09);
     myMenu.position = ccp(0,0);
     
 	// add the menu to scene
@@ -97,6 +93,7 @@
     
 }
 
+/* sets what scene will be changed when menu item touched down */
 - (void) doSomething: (CCMenuItem  *) menuItem
 {
 	int parameter = menuItem.tag;
@@ -104,9 +101,6 @@
     if (parameter==1) {
         [self changeScene:[PlayLayer scene]];
     }
-    // if (parameter==5) {
-    //     [self changeScene:[AchievementModeLayer scene]];
-    // }
     if (parameter==2) {
         // [self changeScene:[HowToLayer scene]];
     }
@@ -118,11 +112,10 @@
     }
 }
 
+/* changes scene, when useLoadingScreen set to true, change screen using loading screen */
 -(void) changeScene: (id) layer
 {
-	//BOOL useLoadingScene = YES;
-    [[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
-    /*
+	BOOL useLoadingScene = true;
 	if (useLoadingScene)
 	{
 		[[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
@@ -131,7 +124,6 @@
 	{
 		[[CCDirector sharedDirector] replaceScene:layer];
 	}
-     */
 }
 
 -(void) onEnter

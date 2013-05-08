@@ -1,9 +1,12 @@
 //
 //  CCAnimationHelper.m
-//  SpriteBatches
+//  Slack
 //
-//  Created by Steffen Itterheim on 06.08.10.
-//  Copyright 2010 Steffen Itterheim. All rights reserved.
+//  Created by Jacob Preston on 5/1/13.
+//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//
+// Code used from Learning Cocos2d source code
+// used to help assist the animation    
 //
 
 #import "CCAnimationHelper.h"

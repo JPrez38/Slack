@@ -23,103 +23,6 @@ static PlayLayer* sharedPlayLayer;
 	return sharedPlayLayer;
 }
 
-- (id) init {
-    
-    if ((self = [super init]))
-    {
-        sharedPlayLayer=self;
-#if KK_PLATFORM_IOS
-        //self.isAccelerometerEnabled = YES;
-        _accelerometerEnabled=YES;
-        _touchEnabled = YES;
-#endif
-        
-        balBar=-10;
-        
-		CGSize screenSize = [[CCDirector sharedDirector] winSize];
-        gameOver=false;
-        swaying=false;
-		
-        
-		background = [CCSprite spriteWithFile:@"grass_bkgrd1.png"];
-		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
-        //background.opacity=156;
-		[self addChild:background z:-1];
-        
-        slackline = [CCSprite spriteWithFile:@"slackline1.png"];
-        [self addChild:slackline z:0 tag:1];
-        slackline.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
-        
-        //HighScoreLayer *highscores = [HighScoreLayer highScoreLayer];
-        
-        person = [Person person];
-		person.position = CGPointMake(screenSize.width/2, screenSize.height / 2);
-		[self addChild:person z:10];
-        
-        tree1 = [CCSprite spriteWithFile:@"tree01.png"];
-        tree2 = [CCSprite spriteWithFile:@"tree02.png"];
-        tree3 = [CCSprite spriteWithFile:@"tree03.png"];
-        
-        trees = [[NSMutableArray alloc] init];
-        [trees addObject:tree1];
-        [trees addObject:tree2];
-        [trees addObject:tree3];
-        
-        [self addChild:trees[0] z:0 tag:0];
-        //        tree1.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
-        
-        [self addChild:trees[1] z:0 tag:0];
-        //        tree2.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
-        
-        [self addChild:trees[2] z:0 tag:0];
-        //        tree3.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
-        
-        for (CCSprite* aTree in trees) {
-            //NSLog(@"x: %f, y: %f", aTree.position.x, aTree.position.y);
-            aTree.position = CGPointMake(screenSize.width * 0.5, screenSize.height * 0.5);
-        }
-        
-        player = [CCSprite spriteWithFile:@"ball.png"];
-        //player.opacity=0;
-        [self addChild:player z:balBar tag:1];
-        float imageHeight = player.texture.contentSize.height;
-        player.position = CGPointMake(screenSize.width / 2, imageHeight / 2);
-        
-        leftStoppedBar = [CCSprite spriteWithFile:@"line.png"];
-        //leftStoppedBar.opacity=0;
-        [self addChild:leftStoppedBar z:balBar tag:1];
-        float imageHeight1 = leftStoppedBar.texture.contentSize.height;
-        leftStoppedBar.position = CGPointMake(screenSize.width / 2-60, imageHeight1 / 2);
-        
-        rightStoppedBar = [CCSprite spriteWithFile:@"line.png"];
-        //rightStoppedBar.opacity=0;
-        [self addChild:rightStoppedBar z:balBar tag:1];
-        rightStoppedBar.position = CGPointMake(screenSize.width / 2+60, imageHeight1 / 2);
-        
-        leftMovingBar = [CCSprite spriteWithFile:@"line2.png"];
-        //leftMovingBar.opacity=0;
-        [self addChild:leftMovingBar z:balBar tag:1];
-        float imageHeight2 = leftMovingBar.texture.contentSize.height;
-        leftMovingBar.position = CGPointMake(screenSize.width / 2+55, imageHeight2 / 2);
-        
-        rightMovingBar = [CCSprite spriteWithFile:@"line2.png"];
-        //rightMovingBar.opacity=0;
-        [self addChild:rightMovingBar z:balBar tag:1];
-        rightMovingBar.position = CGPointMake(screenSize.width / 2-55, imageHeight2 / 2);
-        
-		
-		// schedules the –(void) update:(ccTime)delta method to be called every frame
-		[self scheduleUpdate];
-        
-        scoreLabel = [CCLabelBMFont labelWithString:@"0" fntFile:@"bitmapfont.fnt"];
-		scoreLabel.position = CGPointMake(80, screenSize.height);
-		// Adjust the label's anchorPoint's y position to make it align with the top.
-		scoreLabel.anchorPoint = CGPointMake(0.5f, 1.0f);
-		// Add the score label with z value of -1 so it's drawn below everything else
-		[self addChild:scoreLabel];
-    }
-    return self;
-}
 
 + (id) scene {
     CCScene *scene = [CCScene node];
@@ -127,6 +30,129 @@ static PlayLayer* sharedPlayLayer;
     [scene addChild:layer];
     return scene;
 }
+
+- (id) init {
+    
+    if ((self = [super init]))
+    {
+        sharedPlayLayer=self;
+#if KK_PLATFORM_IOS
+        _accelerometerEnabled=YES;
+        _touchEnabled = YES;
+#endif
+        balBar=-10;
+        
+        screenSize = [[CCDirector sharedDirector] winSize];
+        gameOver=false;
+        swaying=false;
+        [self initBackGround];
+        [self initPerson];
+        [self setUpMenus];
+        [self initEnviornment];
+        [self initBalanceBar];
+        [self initScoreLabel];
+
+		[self scheduleUpdate];
+        
+        
+    }
+    return self;
+}
+
+- (void) initScoreLabel {
+    scoreLabel = [CCLabelBMFont labelWithString:@"0" fntFile:@"bitmapfont.fnt"];
+    scoreLabel.position = CGPointMake(80, screenSize.height);
+
+    scoreLabel.anchorPoint = CGPointMake(0.5f, 1.0f);
+
+    [self addChild:scoreLabel];
+    
+}
+
+- (void) initBalanceBar {
+    player = [CCSprite spriteWithFile:@"ball.png"];
+    //player.opacity=0;
+    [self addChild:player z:balBar tag:1];
+    float imageHeight = player.texture.contentSize.height;
+    player.position = CGPointMake(screenSize.width / 2, imageHeight / 2);
+    
+    leftStoppedBar = [CCSprite spriteWithFile:@"line.png"];
+    //leftStoppedBar.opacity=0;
+    [self addChild:leftStoppedBar z:balBar tag:1];
+    float imageHeight1 = leftStoppedBar.texture.contentSize.height;
+    leftStoppedBar.position = CGPointMake(screenSize.width / 2-60, imageHeight1 / 2);
+    
+    rightStoppedBar = [CCSprite spriteWithFile:@"line.png"];
+    //rightStoppedBar.opacity=0;
+    [self addChild:rightStoppedBar z:balBar tag:1];
+    rightStoppedBar.position = CGPointMake(screenSize.width / 2+60, imageHeight1 / 2);
+    
+    leftMovingBar = [CCSprite spriteWithFile:@"line2.png"];
+    //leftMovingBar.opacity=0;
+    [self addChild:leftMovingBar z:balBar tag:1];
+    float imageHeight2 = leftMovingBar.texture.contentSize.height;
+    leftMovingBar.position = CGPointMake(screenSize.width / 2+55, imageHeight2 / 2);
+    
+    rightMovingBar = [CCSprite spriteWithFile:@"line2.png"];
+    //rightMovingBar.opacity=0;
+    [self addChild:rightMovingBar z:balBar tag:1];
+    rightMovingBar.position = CGPointMake(screenSize.width / 2-55, imageHeight2 / 2);
+}
+
+- (void) initEnviornment {
+    environmentObjects = [[NSMutableArray alloc] init];
+    [environmentObjects addObject:[CCSprite spriteWithFile:@"tree01.png"]];
+    [environmentObjects addObject:[CCSprite spriteWithFile:@"tree02.png"]];
+    [environmentObjects addObject:[CCSprite spriteWithFile:@"tree03.png"]];
+    //        [environmentObjects addObject:[CCSprite spriteWithFile:@"rock01.png"]];
+    //        [environmentObjects addObject:[CCSprite spriteWithFile:@"rock02.png"]];
+    //        [environmentObjects addObject:[CCSprite spriteWithFile:@"rock02.png"]];
+    
+    for (unsigned int i = 0; i < environmentObjects.count; i++)
+    {
+        CCSprite* anEnvirObj = environmentObjects[i];
+        // Assuming there are 3 trees at index 0, 1, and 2
+        if (i < 3) {
+            [self addChild:anEnvirObj z:2 tag:0];
+            //            NSLog(@"x: %f, y: %f", anEnvirObj.position.x, anEnvirObj.position.y);
+            anEnvirObj.position = CGPointMake(screenSize.width * 0.5, screenSize.height * 0.5);
+        }
+        else {
+            [self addChild:anEnvirObj z:1 tag:0];
+            //            NSLog(@"x: %f, y: %f", anEnvirObj.position.x, anEnvirObj.position.y);
+            int randomWidthPos = arc4random() % 4;
+            int randomWidthSide = arc4random() % 2; //0 go to left, 1 go to right
+            
+            double rndWidthPos = randomWidthPos;
+            
+            if(randomWidthSide == 0){       //go to left
+                anEnvirObj.position = CGPointMake(screenSize.width * (rndWidthPos/10.0), screenSize.height * (arc4random() / RAND_MAX));
+            }
+            else{               //go to right
+                anEnvirObj.position = CGPointMake(screenSize.width * (1 - rndWidthPos/10.0), screenSize.height * (arc4random() / RAND_MAX));
+            }
+        }
+    }
+}
+
+- (void) initBackGround {
+    background = [CCSprite spriteWithFile:@"grass_bkgrd1.png"];
+    background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+    //background.opacity=156;
+    [self addChild:background z:-1];
+    
+    slackline = [CCSprite spriteWithFile:@"slackline1.png"];
+    [self addChild:slackline z:0 tag:1];
+    slackline.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+}
+
+- (void) initPerson {
+    person = [Person person];
+    person.position = CGPointMake(screenSize.width/2, screenSize.height / 2);
+    [self addChild:person z:10];
+    
+}
+
 
 -(void) update:(ccTime)delta
 {
@@ -137,7 +163,6 @@ static PlayLayer* sharedPlayLayer;
         pos.x += playerVelocity.x;
         
         // The Player should also be stopped from going outside the screen
-        CGSize screenSize = [CCDirector sharedDirector].winSize;
         float imageWidthHalved = player.texture.contentSize.width * 0.5f;
         float leftBorderLimit = imageWidthHalved;
         float rightBorderLimit = screenSize.width - imageWidthHalved;
@@ -179,9 +204,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) adjustArms {
-    //CGSize screenSize = [CCDirector sharedDirector].winSize;
-    //CGPoint middle = CGPointMake(screenSize.width / 2, 0);
-    //float actualDistance = ccpDistance(player.position, middle);
+    
     float band = ccpDistance(leftStoppedBar.position, rightStoppedBar.position);
     float range = band/17.0;
     float currentLocation = ccpDistance(player.position, leftStoppedBar.position);
@@ -189,10 +212,7 @@ static PlayLayer* sharedPlayLayer;
     if(pictureNumber > 16){
         pictureNumber=16;
     }
-    
     [[Person sharedPerson] moveArms:[NSNumber numberWithInt:pictureNumber]];
-    
-    
 }
 
 - (float) sway {
@@ -200,7 +220,7 @@ static PlayLayer* sharedPlayLayer;
     float adj;
     //float sensitivity=.9f;
     //float prob=.1;
-    /*
+    /*/Users/jacobpreston4/progs/objectivecs/Slack/Slack/Projectfiles/PlayLayer.m
      int rand = arc4random()%10;
      //int direction=arc4random()%2;
      if (prob*10 >=rand || (swaying)){
@@ -229,7 +249,7 @@ static PlayLayer* sharedPlayLayer;
 - (float) wind {
     float windadj=0;
     float sensitivity=2.0f;
-    float prob=.003;
+    float prob=.008;
     
     int rand = arc4random()%1000;
     if (blowing==true){
@@ -272,18 +292,20 @@ static PlayLayer* sharedPlayLayer;
 
 - (void) updateTrees
 {
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     int positionDelta = 5;
+    int accelerationFactor = 380;
     
-    for (CCSprite* aTree in trees) {
-        //NSLog(@"x: %f, y: %f", aTree.position.x, aTree.position.y);
+    for (CCSprite* anEnvirObj in environmentObjects) {
+        NSLog(@"x: %f, y: %f", anEnvirObj.position.x, anEnvirObj.position.y);
         
-        float newHeightPosition = aTree.position.y - positionDelta;
+        positionDelta += screenSize.height / accelerationFactor;
+        
+        float newHeightPosition = anEnvirObj.position.y - positionDelta;
         if (newHeightPosition < -0.5 * screenSize.height) {
             newHeightPosition = 1.5 * screenSize.height;
         }
         
-        aTree.position = CGPointMake(aTree.position.x, newHeightPosition);
+        anEnvirObj.position = CGPointMake(anEnvirObj.position.x, newHeightPosition);
     }
 }
 
@@ -298,7 +320,6 @@ static PlayLayer* sharedPlayLayer;
 
 -(void) checkForFall: (NSString*) state
 {
-    CGSize screenSize = [CCDirector sharedDirector].winSize;
     CGPoint middle = CGPointMake(screenSize.width / 2, 0);
     float actualDistance = ccpDistance(player.position, middle);
     float stoppedBand = ccpDistance(middle, leftStoppedBar.position);
@@ -315,7 +336,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) gameOver {
-     CGSize size = [CCDirector sharedDirector].winSize;
+    CGSize size = [CCDirector sharedDirector].winSize;
     if (player.position.x-size.width/2 > 0) {
         [[Person sharedPerson] scheduleFalling:@"right"];
     }
@@ -323,7 +344,7 @@ static PlayLayer* sharedPlayLayer;
         [[Person sharedPerson] scheduleFalling:@"left"];
     }
     CCLabelTTF* label = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Marker Felt" fontSize:64];
-   
+    
     label.position = CGPointMake(size.width / 2, size.height / 2);
     [self addChild:label];
     [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
@@ -334,7 +355,6 @@ static PlayLayer* sharedPlayLayer;
 -(void) accelerometer:(UIAccelerometer *)accelerometer
         didAccelerate:(UIAcceleration *)acceleration
 {
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
 	// controls how quickly velocity decelerates (lower = quicker to change direction)
 	float deceleration = 0.5f;
 	// determines how sensitive the accelerometer reacts (higher = more sensitive)
@@ -370,6 +390,30 @@ static PlayLayer* sharedPlayLayer;
 	}
 }
 #endif
+
+-(void) setUpMenus
+{
+	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
+                                                         selectedImage: @"main_menu_icon2.png"
+                                                                target:self
+                                                              selector:@selector(doSomething:)];
+    menuItem1.tag=1;
+    
+	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
+    menuItem1.position = ccp(screenSize.width*.8, screenSize.height*.95);
+    myMenu.position = ccp(0,0);
+	[self addChild:myMenu];
+}
+
+- (void) doSomething: (CCMenuItem  *) menuItem
+{
+	int parameter = menuItem.tag;
+    
+    if (parameter==1) {
+        [[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
+        
+    }
+}
 
 -(void) changeScene: (id) layer
 {

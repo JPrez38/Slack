@@ -17,7 +17,7 @@
 static Person* sharedPerson;
 +(Person*) sharedPerson
 {
-	NSAssert(sharedPerson != nil, @"GameScene instance not yet initialized!");
+	NSAssert(sharedPerson != nil, @"Person instance not yet initialized!");
 	return sharedPerson;
 }
 
@@ -32,46 +32,47 @@ static Person* sharedPerson;
         screenSize = [[CCDirector sharedDirector] winSize];
         sharedPerson=self;
         
-        count=0;
-        foot=@"rightfoot";
-        [self legs];
-    
-        upperbody = [CCSprite spriteWithFile:@"upperBod9.png"];
-        upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
-        [self addChild:upperbody z:1 tag:1];
-        
-        NSString* fallingLeft = @"falling_02_";
-        NSString* fallingRight = @"falling_01_";
-        CCAnimation* rightFallanim = [CCAnimation animationWithFile:fallingRight frameCount:18 delay:0.07f];
-        CCAnimation* leftFallanim = [CCAnimation animationWithFile:fallingLeft frameCount:18 delay:0.07f];
-        
-        [[CCAnimationCache sharedAnimationCache] addAnimation:rightFallanim name:@"rightFall"];
-        [[CCAnimationCache sharedAnimationCache] addAnimation:leftFallanim name:@"leftFall"];
-        
-        
-        //[self performSelector:@selector(scheduleFalling:) withObject:@"left" afterDelay:4.0f];
-        
-        //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:10] afterDelay:3.0f];
-        //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:14] afterDelay:4.0f];
-        //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:4] afterDelay:7.0f];
-        //[self performSelector:@selector(moveArms:) withObject:[NSNumber numberWithInt:8] afterDelay:8.0f];
+        [self initUpperBody];
+        [self initLegs];
+        [self initFallingAnimations];
         
         [self scheduleUpdate];
     }
     return self;
 }
 
-- (void) legs {
+- (void) initUpperBody {
+    /* initializes the upperbody sprite with the middle most image */
+    upperbody = [CCSprite spriteWithFile:@"upperBod9.png"];
+    upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
+    [self addChild:upperbody z:1 tag:1];
+}
+
+- (void) initFallingAnimations {
+    NSString* fallingLeft = @"falling_02_";
+    NSString* fallingRight = @"falling_01_";
+    /* sets the falling animations, delay is used to adjust the speed of the fall */
+    CCAnimation* rightFallanim = [CCAnimation animationWithFile:fallingRight frameCount:18 delay:0.07f];
+    CCAnimation* leftFallanim = [CCAnimation animationWithFile:fallingLeft frameCount:18 delay:0.07f];
+    
+    [[CCAnimationCache sharedAnimationCache] addAnimation:rightFallanim name:@"rightFall"];
+    [[CCAnimationCache sharedAnimationCache] addAnimation:leftFallanim name:@"leftFall"];
+}
+
+- (void) initLegs {
+    foot=@"rightfoot";
+    count=0;
     NSString* rightStep = @"rightStep";
     NSString* leftStep = @"leftStep";
+    /* initializes seperate right step and left step animations
+     * delay sets the speed of the guy walking
+     */
     CCAnimation* rightStepAnim = [CCAnimation animationWithFile:rightStep frameCount:8 delay:0.08f];
     CCAnimation* leftStepAnim = [CCAnimation animationWithFile:leftStep frameCount:8 delay:0.08f];
     
     [[CCAnimationCache sharedAnimationCache] addAnimation:rightStepAnim name:@"rightfoot"];
     [[CCAnimationCache sharedAnimationCache] addAnimation:leftStepAnim name:@"leftfoot"];
     myAction= [CCAnimate actionWithAnimation:rightStepAnim];
-    
-   
 }
 
 - (void) walk {
@@ -79,14 +80,17 @@ static Person* sharedPerson;
     if ([[PlayLayer sharedPlayLayer] isGameOver]) {
         [self stopAction:myAction];
     }
-    
+    /* loads the animation by foot name */
     CCAnimation* anim = [[CCAnimationCache sharedAnimationCache] animationByName:foot];
+    /*runs the animation only after the action before is done or if no action has been performed
+     * i.e., the very first step
+     */
     if (([myAction isDone] || count < 1) && (![[PlayLayer sharedPlayLayer] isGameOver])){
         myAction= [CCAnimate actionWithAnimation:anim];
         [self runAction:myAction];
         count++;
-        //performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0
-        [[PlayLayer sharedPlayLayer] incrementScore];
+        [[PlayLayer sharedPlayLayer] incrementScore]; //increments the score in the play layer
+        /* changes the foot every step */
         if ([foot isEqualToString:@"rightfoot"]) {
             foot=@"leftfoot";
         }
@@ -99,24 +103,25 @@ static Person* sharedPerson;
 - (void) scheduleFalling:(NSString *) side {
     CCAnimation *anim;
     CCAction *action;
+    /* runs the fall right animation */
     if ([side isEqualToString:@"right"]) {
         anim = [[CCAnimationCache sharedAnimationCache] animationByName:@"rightFall"];
         action = [CCAnimate actionWithAnimation:anim];
         [self runAction:action];
     }
-
+    /* runs the fall left animation */
     if ([side isEqualToString:@"left"]){
          anim = [[CCAnimationCache sharedAnimationCache] animationByName:@"leftFall"];
          action = [CCAnimate actionWithAnimation:anim];
          [self runAction:action];
     }
-    
-    
-    
 }
 
 
-
+/* arms are moved by removing the current upperbody Sprite
+ * changing the image to be loaded and then reloading the new image
+ * based on the position sent to method from the playlayer
+ */
 - (void) moveArms:(NSNumber*) position {
     [self removeChild:upperbody];
     if (![[PlayLayer sharedPlayLayer] isGameOver]){
@@ -128,25 +133,12 @@ static Person* sharedPerson;
     }
 }
 
--(void) update:(ccTime)delta
-{
-    
-}
+/* unused update method. leave in to keep in line with cocos2d classes */
+-(void) update:(ccTime)delta {}
 
 -(void) changeScene: (id) layer
 {
-	//BOOL useLoadingScene = YES;
     [[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
-    /*
-     if (useLoadingScene)
-     {
-     [[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];
-     }
-     else
-     {
-     [[CCDirector sharedDirector] replaceScene:layer];
-     }
-     */
 }
 
 -(void) onEnter

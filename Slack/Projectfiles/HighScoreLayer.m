@@ -30,53 +30,36 @@ static HighScoreLayer* sharedHighScoreLayer;
     
     if ((self = [super init]))
     {
-        //background images
-        CGSize screenSize = [[CCDirector sharedDirector] winSize];
-		background = [CCSprite spriteWithFile:@"backgroundStretched.png"];
-		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
-        [self addChild:background z:-1];
-        
-        /*
-         personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
-         personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
-         personBottom.opacity = 50;
-         [self addChild:personBottom z:0 tag:1];
-         
-         personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
-         personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
-         personTop.opacity = 50;
-         [self addChild:personTop z:0 tag:1];
-         */
-        
-        CCLabelTTF* labelTop = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:64];
-		CGSize sizeTop = [CCDirector sharedDirector].winSize;
-		labelTop.position = CGPointMake(sizeTop.width / 2, sizeTop.height*.9);
-        labelTop.color = ccc3(255,140,0);
-		[self addChild:labelTop];
+        screenSize = [[CCDirector sharedDirector] winSize];
+        sharedHighScoreLayer=self;
+        [self setUpBackground];
         [self setUpMenus];
         
-        
-        sharedHighScoreLayer=self;
         // Global Variables
         maxScoresDisplayed = 6;
         
         // Get data from plist
         NSMutableArray *scores = [self readStoredScores];
-        /*
-         [self submitNameToHighScore:@"Abe Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-         [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-         [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-         [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-         [self submitNameToHighScore:@"Bob Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-         [self submitNameToHighScore:@"Cat Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-         [self submitNameToHighScore:@"Dylan Dudley" withScore:[NSNumber numberWithInt:arc4random() % 10]];
-         */
         
         scores = [self readStoredScores];
         NSLog(@"Displayed Scores: %@", scores);
         [self displayScores:scores];
     }
     return self;
+}
+
+- (void) setUpBackground {
+    //background images
+    
+    background = [CCSprite spriteWithFile:@"backgroundStretched.png"];
+    background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+    [self addChild:background z:-1];
+    
+    CCLabelTTF* labelTop = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Marker Felt" fontSize:64];
+    CGSize sizeTop = [CCDirector sharedDirector].winSize;
+    labelTop.position = CGPointMake(sizeTop.width / 2, sizeTop.height*.9);
+    labelTop.color = ccc3(255,140,0);
+    [self addChild:labelTop];
 }
 
 + (id) scene {
@@ -166,11 +149,10 @@ static HighScoreLayer* sharedHighScoreLayer;
 
 - (void) displayScores: (NSMutableArray*) scores
 {
-    CGSize size = [CCDirector sharedDirector].winSize;
-    int baseHeightPosition = size.height * 0.72;
-    int heightSpacing = size.height * 0.1;
-    int firstColumnPosition = size.width * 0.3;
-    int secondColumnPosition = size.width * 0.72;
+    int baseHeightPosition = screenSize.height * 0.72;
+    int heightSpacing = screenSize.height * 0.1;
+    int firstColumnPosition = screenSize.width * 0.3;
+    int secondColumnPosition = screenSize.width * 0.72;
     
     int numScoresDisplayed = maxScoresDisplayed;
     if (scores.count < maxScoresDisplayed) numScoresDisplayed = scores.count;
@@ -205,8 +187,7 @@ static HighScoreLayer* sharedHighScoreLayer;
     menuItem1.tag=1;
     
 	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
-    CGSize size = [CCDirector sharedDirector].winSize;
-    menuItem1.position = ccp(size.width*.5, size.height*.1);
+    menuItem1.position = ccp(screenSize.width*.5, screenSize.height*.1);
     myMenu.position = ccp(0,0);
 	[self addChild:myMenu];
 }

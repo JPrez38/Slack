@@ -16,30 +16,32 @@
     
     if ((self = [super init]))
     {
-        CGSize screenSize = [[CCDirector sharedDirector] winSize];
-		background = [CCSprite spriteWithFile:@"plainBackGround.png"];
-		background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
-        //background.opacity=156;
-		[self addChild:background z:-1];
+        screenSize = [[CCDirector sharedDirector] winSize];
+        [self setUpBackground];
         [self setUpMenus];
         
-        personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
-        [self addChild:personBottom z:0 tag:1];
-        personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
-        
-        personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
-        [self addChild:personTop z:0 tag:1];
-        personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
-        
-        NSLog(@"About Screen Called");
-        CCLabelTTF* label = [CCLabelTTF labelWithString:@"Get Involved" fontName:@"Marker Felt" fontSize:64];
-		CGSize size = [CCDirector sharedDirector].winSize;
-		label.position = CGPointMake(size.width / 2, size.height*.9);
-        label.color = ccc3(0,0,0);
-		[self addChild:label];
-        [self setUpMenus];
     }
     return self;
+}
+
+- (void) setUpBackground {
+
+    background = [CCSprite spriteWithFile:@"plainBackGround.png"];
+    background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+    [self addChild:background z:-1];
+    
+    personBottom = [CCSprite spriteWithFile:@"menuLowerBod.png"];
+    [self addChild:personBottom z:0 tag:1];
+    personBottom.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+    
+    personTop = [CCSprite spriteWithFile:@"menuUpperBod.png"];
+    [self addChild:personTop z:0 tag:1];
+    personTop.position = CGPointMake(screenSize.width / 2, screenSize.height*.7);
+    
+    CCLabelTTF* label = [CCLabelTTF labelWithString:@"Get Involved" fontName:@"Marker Felt" fontSize:64];
+    label.position = CGPointMake(screenSize.width / 2, screenSize.height*.9);
+    label.color = ccc3(0,0,0);
+    [self addChild:label];
 }
 
 + (id) scene {
@@ -62,8 +64,7 @@
 	// Create a menu and add menu items to it
 	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
     
-    CGSize size = [CCDirector sharedDirector].winSize;
-    menuItem1.position = ccp(size.width*.5, size.height*.1);
+    menuItem1.position = ccp(screenSize.width*.5, screenSize.height*.1);
     myMenu.position = ccp(0,0);
     
 	// add the menu to your scene

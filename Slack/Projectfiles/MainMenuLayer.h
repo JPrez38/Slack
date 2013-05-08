@@ -13,6 +13,7 @@
     CCSprite* background;
     CCSprite* personTop;
     CCSprite* personBottom;
+    CGSize screenSize;
 }
 
 + (id) scene;

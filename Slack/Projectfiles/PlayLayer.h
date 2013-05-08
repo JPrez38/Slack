@@ -35,6 +35,8 @@
     NSString *direction;
     int count;
     int balBar;
+    NSMutableArray* environmentObjects;
+    CGSize screenSize;
     
     
 }
