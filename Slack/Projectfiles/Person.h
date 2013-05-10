@@ -16,6 +16,8 @@
     CCAction* myAction;
     CGSize screenSize;
     NSString* foot;
+    float playerSpeed;
+    
     
 }
 
@@ -25,5 +27,7 @@
 - (void) walk;
 - (void) moveArms:(NSNumber*) position;
 - (void) scheduleFalling:(NSString *) side;
+- (void) changeSpeed: (float) speed;
+- (float) getSpeed;
 
 @end

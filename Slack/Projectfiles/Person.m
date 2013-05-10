@@ -62,17 +62,36 @@ static Person* sharedPerson;
 - (void) initLegs {
     foot=@"rightfoot";
     count=0;
+    playerSpeed=.08f;
     NSString* rightStep = @"rightStep";
     NSString* leftStep = @"leftStep";
     /* initializes seperate right step and left step animations
      * delay sets the speed of the guy walking
      */
-    CCAnimation* rightStepAnim = [CCAnimation animationWithFile:rightStep frameCount:8 delay:0.08f];
-    CCAnimation* leftStepAnim = [CCAnimation animationWithFile:leftStep frameCount:8 delay:0.08f];
+    CCAnimation* rightStepAnim = [CCAnimation animationWithFile:rightStep frameCount:8 delay:playerSpeed];
+    CCAnimation* leftStepAnim = [CCAnimation animationWithFile:leftStep frameCount:8 delay:playerSpeed];
     
     [[CCAnimationCache sharedAnimationCache] addAnimation:rightStepAnim name:@"rightfoot"];
     [[CCAnimationCache sharedAnimationCache] addAnimation:leftStepAnim name:@"leftfoot"];
     myAction= [CCAnimate actionWithAnimation:rightStepAnim];
+}
+
+- (void) changeSpeed: (float) newSpeed {
+    playerSpeed= max(newSpeed, .065);
+    NSString* rightStep = @"rightStep";
+    NSString* leftStep = @"leftStep";
+    /* initializes seperate right step and left step animations
+     * delay sets the speed of the guy walking
+     */
+    CCAnimation* rightStepAnim = [CCAnimation animationWithFile:rightStep frameCount:8 delay:playerSpeed];
+    CCAnimation* leftStepAnim = [CCAnimation animationWithFile:leftStep frameCount:8 delay:playerSpeed];
+    
+    [[CCAnimationCache sharedAnimationCache] addAnimation:rightStepAnim name:@"rightfoot"];
+    [[CCAnimationCache sharedAnimationCache] addAnimation:leftStepAnim name:@"leftfoot"];
+}
+
+- (float) getSpeed {
+    return playerSpeed;
 }
 
 - (void) walk {
@@ -130,6 +149,7 @@ static Person* sharedPerson;
         upperbody = [CCSprite spriteWithFile:image];
         upperbody.position = CGPointMake(screenSize.width / 2, screenSize.height/2);
         [self addChild:upperbody];
+        //NSLog(@"HEYYYY %@", position);
     }
 }
 

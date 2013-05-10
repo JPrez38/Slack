@@ -12,6 +12,15 @@
 #import "Person.h"
 #import "HighScoreLayer.h"
 
+#define SLOW .08
+#define MEDIUM .0725
+#define FAST .065
+
+//used for balance bar
+#define ON 1
+#define OFF -10
+#define BALBAR OFF
+
 
 
 @implementation PlayLayer
@@ -40,9 +49,7 @@ static PlayLayer* sharedPlayLayer;
         _accelerometerEnabled=YES;
         _touchEnabled = YES;
 #endif
-        balBar=-10;
-        
-        screenSize = [[CCDirector sharedDirector] winSize];
+        balBar=BALBAR;
         gameOver=false;
         swaying=false;
         [self initBackGround];
@@ -51,7 +58,6 @@ static PlayLayer* sharedPlayLayer;
         [self initEnviornment];
         [self initBalanceBar];
         [self initScoreLabel];
-
 		[self scheduleUpdate];
         
         
@@ -60,6 +66,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) initScoreLabel {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     scoreLabel = [CCLabelBMFont labelWithString:@"0" fntFile:@"bitmapfont.fnt"];
     scoreLabel.position = CGPointMake(80, screenSize.height);
 
@@ -70,6 +77,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) initBalanceBar {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     player = [CCSprite spriteWithFile:@"ball.png"];
     //player.opacity=0;
     [self addChild:player z:balBar tag:1];
@@ -100,6 +108,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) initEnviornment {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     environmentObjects = [[NSMutableArray alloc] init];
     [environmentObjects addObject:[CCSprite spriteWithFile:@"tree01.png"]];
     [environmentObjects addObject:[CCSprite spriteWithFile:@"tree02.png"]];
@@ -136,6 +145,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) initBackGround {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     background = [CCSprite spriteWithFile:@"grass_bkgrd1.png"];
     background.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
     //background.opacity=156;
@@ -147,6 +157,7 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (void) initPerson {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     person = [Person person];
     person.position = CGPointMake(screenSize.width/2, screenSize.height / 2);
     [self addChild:person z:10];
@@ -157,34 +168,13 @@ static PlayLayer* sharedPlayLayer;
 -(void) update:(ccTime)delta
 {
     if (gameOver == false){
-        
-        // Keep adding up the playerVelocity to the player's position
-        CGPoint pos = player.position;
-        pos.x += playerVelocity.x;
-        
-        // The Player should also be stopped from going outside the screen
-        float imageWidthHalved = player.texture.contentSize.width * 0.5f;
-        float leftBorderLimit = imageWidthHalved;
-        float rightBorderLimit = screenSize.width - imageWidthHalved;
-        
-        // preventing the player sprite from moving outside the screen
-        if (pos.x < leftBorderLimit)
-        {
-            pos.x = leftBorderLimit;
-            playerVelocity = CGPointZero;
-        }
-        else if (pos.x > rightBorderLimit)
-        {
-            pos.x = rightBorderLimit;
-            playerVelocity = CGPointZero;
-        }
-        
-        // assigning the modified position back
-        pos.x += [self sway];
-        player.position = pos;
+        [self updatePosition];
         [self adjustArms];
         [self checkForFall:@"standing"];
+        [self updateSpeed];
         KKTouch* touch;
+        
+        
         CCARRAY_FOREACH([KKInput sharedInput].touches, touch)
         {
             if ([background containsPoint:touch.location] && (!gameOver)) {
@@ -201,6 +191,52 @@ static PlayLayer* sharedPlayLayer;
         [self adjustArms];
         //[[Person sharedPerson] stop];
     }
+}
+
+- (void) updatePosition {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    
+    // Keep adding up the playerVelocity to the player's position
+    CGPoint pos = player.position;
+    pos.x += playerVelocity.x;
+    
+    // The Player should also be stopped from going outside the screen
+    float imageWidthHalved = player.texture.contentSize.width * 0.5f;
+    float leftBorderLimit = imageWidthHalved;
+    float rightBorderLimit = screenSize.width - imageWidthHalved;
+    
+    // preventing the player sprite from moving outside the screen
+    if (pos.x < leftBorderLimit)
+    {
+        pos.x = leftBorderLimit;
+        playerVelocity = CGPointZero;
+    }
+    else if (pos.x > rightBorderLimit)
+    {
+        pos.x = rightBorderLimit;
+        playerVelocity = CGPointZero;
+    }
+    
+    // assigning the modified position back
+    pos.x += [self sway];
+    player.position = pos;
+}
+
+- (void) updateSpeed {
+    if (score==30){
+        [self changeSpeed:MEDIUM];
+    }
+    if (score==70) {
+        [self changeSpeed:FAST];
+    }
+}
+
+- (void) changeSpeed : (float) x {
+    [[Person sharedPerson] changeSpeed:x];
+}
+
+- (float) getSpeed {
+    return [[Person sharedPerson] getSpeed];
 }
 
 - (void) adjustArms {
@@ -220,7 +256,7 @@ static PlayLayer* sharedPlayLayer;
     float adj;
     //float sensitivity=.9f;
     //float prob=.1;
-    /*/Users/jacobpreston4/progs/objectivecs/Slack/Slack/Projectfiles/PlayLayer.m
+    /*
      int rand = arc4random()%10;
      //int direction=arc4random()%2;
      if (prob*10 >=rand || (swaying)){
@@ -247,6 +283,11 @@ static PlayLayer* sharedPlayLayer;
 }
 
 - (float) wind {
+    float adj = [self gust];
+    return adj;
+}
+
+- (float) gust {
     float windadj=0;
     float sensitivity=2.0f;
     float prob=.008;
@@ -292,11 +333,12 @@ static PlayLayer* sharedPlayLayer;
 
 - (void) updateTrees
 {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     int positionDelta = 5;
     int accelerationFactor = 380;
     
     for (CCSprite* anEnvirObj in environmentObjects) {
-        NSLog(@"x: %f, y: %f", anEnvirObj.position.x, anEnvirObj.position.y);
+        //NSLog(@"x: %f, y: %f", anEnvirObj.position.x, anEnvirObj.position.y);
         
         positionDelta += screenSize.height / accelerationFactor;
         
@@ -320,6 +362,7 @@ static PlayLayer* sharedPlayLayer;
 
 -(void) checkForFall: (NSString*) state
 {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CGPoint middle = CGPointMake(screenSize.width / 2, 0);
     float actualDistance = ccpDistance(player.position, middle);
     float stoppedBand = ccpDistance(middle, leftStoppedBar.position);
@@ -355,6 +398,7 @@ static PlayLayer* sharedPlayLayer;
 -(void) accelerometer:(UIAccelerometer *)accelerometer
         didAccelerate:(UIAcceleration *)acceleration
 {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
 	// controls how quickly velocity decelerates (lower = quicker to change direction)
 	float deceleration = 0.5f;
 	// determines how sensitive the accelerometer reacts (higher = more sensitive)
@@ -375,10 +419,10 @@ static PlayLayer* sharedPlayLayer;
     if (distance > 40 && distance <= 60 ) {
         sensitivity=4.0f;
     }
-	
+    
 	// adjust velocity based on current accelerometer acceleration
 	playerVelocity.x = playerVelocity.x * deceleration + acceleration.x * sensitivity;
-	
+    
 	// we must limit the maximum velocity of the player sprite, in both directions
 	if (playerVelocity.x > maxVelocity)
 	{
@@ -393,6 +437,7 @@ static PlayLayer* sharedPlayLayer;
 
 -(void) setUpMenus
 {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
 	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
                                                          selectedImage: @"main_menu_icon2.png"
                                                                 target:self
