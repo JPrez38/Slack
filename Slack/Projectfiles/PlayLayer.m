@@ -52,12 +52,18 @@ static PlayLayer* sharedPlayLayer;
         balBar=BALBAR;
         gameOver=false;
         swaying=false;
+        
+        CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+		[frameCache addSpriteFramesWithFile:@"game-art.plist"];
+        
+        [self initAudio];
         [self initBackGround];
         [self initPerson];
         [self setUpMenus];
         [self initEnviornment];
         [self initBalanceBar];
         [self initScoreLabel];
+        
 		[self scheduleUpdate];
         
         
@@ -162,6 +168,14 @@ static PlayLayer* sharedPlayLayer;
     person.position = CGPointMake(screenSize.width/2, screenSize.height / 2);
     [self addChild:person z:10];
     
+}
+
+- (void) initAudio {
+    
+    // Init sounds
+    SimpleAudioEngine* simpleAudioEngine = [SimpleAudioEngine sharedEngine];
+    [simpleAudioEngine playBackgroundMusic:@"jungle.mp3" loop:YES];
+    [simpleAudioEngine preloadEffect:@"jungle.mp3"];
 }
 
 
@@ -290,7 +304,7 @@ static PlayLayer* sharedPlayLayer;
 - (float) gust {
     float windadj=0;
     float sensitivity=2.0f;
-    float prob=.008;
+    float prob=.0125;
     
     int rand = arc4random()%1000;
     if (blowing==true){
@@ -380,6 +394,7 @@ static PlayLayer* sharedPlayLayer;
 
 - (void) gameOver {
     CGSize size = [CCDirector sharedDirector].winSize;
+    
     if (player.position.x-size.width/2 > 0) {
         [[Person sharedPerson] scheduleFalling:@"right"];
     }
@@ -392,6 +407,7 @@ static PlayLayer* sharedPlayLayer;
     [self addChild:label];
     [self performSelector:@selector(changeScene:) withObject:[MainMenuLayer scene] afterDelay:3.0];
     [[HighScoreLayer sharedHighScoreLayer] submitNameToHighScore:@"TEAM G" withScore:[NSNumber numberWithInt:score]];
+    
 }
 
 #if KK_PLATFORM_IOS
@@ -452,16 +468,65 @@ static PlayLayer* sharedPlayLayer;
 
 - (void) doSomething: (CCMenuItem  *) menuItem
 {
-	int parameter = menuItem.tag;
+    //[self pauseSchedulerAndActionsRecursive:];
+    [[CCDirector sharedDirector] pause];
+    
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    pauseBackground = [CCSprite spriteWithFile:@"pause_black.png"];
+    pauseBackground.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+    pauseBackground.opacity=190;
+    [self addChild:pauseBackground z:15];
+    
+    CCMenuItemImage* menuItem2_1 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
+                                                          selectedImage:@"main_menu_icon2.png"
+                                                                 target:self
+                                                               selector:@selector(goToMenuMain:)];
+	CCMenuItemImage* menuItem2_2 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
+                                                          selectedImage:@"main_menu_icon2.png"
+                                                                 target:self
+                                                               selector:@selector(resumePlay:)];
+    menuItem2_1.tag=1; //go to main menu
+    menuItem2_2.tag=2; //return to game
+    
+    myMenu2 = [CCMenu menuWithItems:menuItem2_1, menuItem2_2, nil];
+    menuItem2_1.position = ccp(screenSize.width*.5, screenSize.height*.7);
+    menuItem2_2.position = ccp(screenSize.width*.5, screenSize.height*.3);
+    myMenu2.position = ccp(0,0);
+    [self addChild:myMenu2 z:16];
+}
+
+- (void)goToMenuMain:(id)sender
+{
+    [[CCDirector sharedDirector] resume];
+    [self changeScene:[MainMenuLayer scene]];
+}
+
+- (void)resumePlay:(id)sender
+{
+    [[CCDirector sharedDirector] resume];
+    [self removeChild:pauseBackground];
+    [self removeChild:myMenu2];
+}
+
+-(void)doSomething2: (CCMenuItem *) menuItem //1=return to mainmenu ; 2=return to game
+{
+    int parameter = menuItem.tag;
     
     if (parameter==1) {
-        [[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
+        [[CCDirector sharedDirector] resume];
+        [self changeScene:[MainMenuLayer scene]];
+    }
+    if (parameter==2){
         
+        [[CCDirector sharedDirector] resume];
     }
 }
 
 -(void) changeScene: (id) layer
 {
+    SimpleAudioEngine* simpleAudioEngine = [SimpleAudioEngine sharedEngine];
+    [simpleAudioEngine stopBackgroundMusic];
+    [simpleAudioEngine unloadEffect:@"jungle.mp3"];
 	BOOL useLoadingScene = YES;
 	if (useLoadingScene)
 	{

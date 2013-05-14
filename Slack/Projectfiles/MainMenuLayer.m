@@ -99,23 +99,23 @@
 	int parameter = menuItem.tag;
     
     if (parameter==1) {
-        [self changeScene:[PlayLayer scene]];
+        [self changeScene:[PlayLayer scene] useLoadingScene:true];
     }
     if (parameter==2) {
         // [self changeScene:[HowToLayer scene]];
     }
     if (parameter==3) {
-        [self changeScene:[HighScoreLayer scene]];
+        [self changeScene:[HighScoreLayer scene] useLoadingScene:false];
     }
     if (parameter==4) {
-        [self changeScene:[GetInvolvedLayer scene]];
+        [self changeScene:[GetInvolvedLayer scene] useLoadingScene:false];
     }
 }
 
 /* changes scene, when useLoadingScreen set to true, change screen using loading screen */
--(void) changeScene: (id) layer
+-(void) changeScene: (id) layer useLoadingScene:(BOOL)useLoadingScene
 {
-	BOOL useLoadingScene = true;
+	//BOOL useLoadingScene = true;
 	if (useLoadingScene)
 	{
 		[[CCDirector sharedDirector] replaceScene:[LoadingScreen sceneWithTargetScene:layer]];

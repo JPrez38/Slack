@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Person.h"
+#import "SimpleAudioEngine.h"
 
 @interface PlayLayer : CCLayer {
     CCSprite* player;
@@ -37,6 +38,8 @@
     int balBar;
     NSMutableArray* environmentObjects;
     float speed;
+    CCSprite* pauseBackground;
+    CCMenu * myMenu2;
     
     
 }
