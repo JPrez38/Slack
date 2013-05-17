@@ -454,16 +454,16 @@ static PlayLayer* sharedPlayLayer;
 -(void) setUpMenus
 {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
-                                                         selectedImage: @"main_menu_icon2.png"
+	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"pause.png"
+                                                         selectedImage: @"pause.png"
                                                                 target:self
                                                               selector:@selector(doSomething:)];
     menuItem1.tag=1;
     
 	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
-    menuItem1.position = ccp(screenSize.width*.8, screenSize.height*.95);
+    menuItem1.position = ccp(screenSize.width*.85, screenSize.height*.925);
     myMenu.position = ccp(0,0);
-	[self addChild:myMenu];
+	[self addChild:myMenu z:10 ];
 }
 
 - (void) doSomething: (CCMenuItem  *) menuItem
@@ -474,23 +474,30 @@ static PlayLayer* sharedPlayLayer;
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     pauseBackground = [CCSprite spriteWithFile:@"pause_black.png"];
     pauseBackground.position = CGPointMake(screenSize.width / 2, screenSize.height / 2);
-    pauseBackground.opacity=190;
+    pauseBackground.opacity=180;
     [self addChild:pauseBackground z:15];
     
-    CCMenuItemImage* menuItem2_1 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
-                                                          selectedImage:@"main_menu_icon2.png"
-                                                                 target:self
-                                                               selector:@selector(goToMenuMain:)];
-	CCMenuItemImage* menuItem2_2 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
-                                                          selectedImage:@"main_menu_icon2.png"
+    pauseLabel = [CCLabelTTF labelWithString:@"Paused" fontName:@"Marker Felt" fontSize:64];
+    CGSize sizeTop = [CCDirector sharedDirector].winSize;
+    pauseLabel.position = CGPointMake(sizeTop.width / 2, sizeTop.height*.8);
+    pauseLabel.color = ccc3(256,256,256);
+    [self addChild:pauseLabel z:16];
+    
+    CCMenuItemImage* menuItem2_1 = [CCMenuItemImage itemWithNormalImage:@"Resume.png"
+                                                          selectedImage:@"Resume.png"
                                                                  target:self
                                                                selector:@selector(resumePlay:)];
-    menuItem2_1.tag=1; //go to main menu
-    menuItem2_2.tag=2; //return to game
+	CCMenuItemImage* menuItem2_2 = [CCMenuItemImage itemWithNormalImage:@"main_menu_icon.png"
+                                                          selectedImage:@"main_menu_icon.png"
+                                                                 target:self
+                                                               selector:@selector(goToMenuMain:)];
+    menuItem2_1.tag=1; //return to game
+    menuItem2_2.tag=2; //go to main menu
+    
     
     myMenu2 = [CCMenu menuWithItems:menuItem2_1, menuItem2_2, nil];
-    menuItem2_1.position = ccp(screenSize.width*.5, screenSize.height*.7);
-    menuItem2_2.position = ccp(screenSize.width*.5, screenSize.height*.3);
+    menuItem2_1.position = ccp(screenSize.width*.5, screenSize.height*.6);
+    menuItem2_2.position = ccp(screenSize.width*.5, screenSize.height*.4);
     myMenu2.position = ccp(0,0);
     [self addChild:myMenu2 z:16];
 }
@@ -505,21 +512,8 @@ static PlayLayer* sharedPlayLayer;
 {
     [[CCDirector sharedDirector] resume];
     [self removeChild:pauseBackground];
+    [self removeChild:pauseLabel];
     [self removeChild:myMenu2];
-}
-
--(void)doSomething2: (CCMenuItem *) menuItem //1=return to mainmenu ; 2=return to game
-{
-    int parameter = menuItem.tag;
-    
-    if (parameter==1) {
-        [[CCDirector sharedDirector] resume];
-        [self changeScene:[MainMenuLayer scene]];
-    }
-    if (parameter==2){
-        
-        [[CCDirector sharedDirector] resume];
-    }
 }
 
 -(void) changeScene: (id) layer

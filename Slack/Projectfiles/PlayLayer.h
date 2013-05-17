@@ -40,6 +40,7 @@
     float speed;
     CCSprite* pauseBackground;
     CCMenu * myMenu2;
+    CCLabelTTF* pauseLabel;
     
     
 }
