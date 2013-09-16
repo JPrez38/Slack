@@ -1,1 +1,1 @@
-Private repo for slacklining game
+Created by Jacob Preston, Priya Saksena and Harsh Sinha
